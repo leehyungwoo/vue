@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vuex"></script>
+ </head>
+ <body>
+ console창으로 확인
+  <div id="app"></div>
+
+<script>
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    todos: [
+      { id: 1, text: '...', done: true },
+      { id: 2, text: '...', done: false },
+	  { id: 3, text: '...', done: false },
+	  { id: 4, text: '...', done: true },
+	  { id: 5, text: '...', done: true },
+    ]
+  },
+  getters: {
+    doneTodos: state => {
+      return state.todos.filter(todo => todo.done)
+    }
+  }
+})
+
+
+
+const Counter = {
+  template: `<div>{{ count }}</div>`,
+  computed:{
+	count(){
+		console.log(this.$store.getters.doneTodos)
+	}
+  }
+ 
+}
+
+const app = new Vue({
+  el: '#app',
+  // "store" 옵션을 사용하여 저장소를 제공하십시오.
+  // 그러면 모든 하위 컴포넌트에 저장소 인스턴스가 삽입됩니다.
+  store,
+  components: { Counter },
+  template: `
+    <div class="app">
+      <counter></counter>
+    </div>
+  `
+})
+</script> 
+
+</body>
+</html>

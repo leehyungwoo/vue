@@ -1,7 +1,6 @@
 <template>
   <div>
     홈
-    {{Date.now()}}
   </div>
 </template>
 

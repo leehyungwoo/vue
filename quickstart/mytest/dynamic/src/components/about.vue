@@ -1,7 +1,7 @@
 <template>
   <div>
     어바웃
-    <treeComponent :orgcharts="this.orgcharts"></treeComponent>
+    <treeComponent :subs="this.orgcharts"></treeComponent>
   </div>
 </template>
 

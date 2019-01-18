@@ -1,11 +1,12 @@
 <template>
   <ul>
-    {{this.orgcharts}}
-    <!-- <li
-      v-for="(sub,i) in this.subs"
+    <li
+      v-for="(s,i) in this.subs"
       :key="i"
-    >{{sub}}
-    </li> -->
+      :class="s.type"
+    >{{s.name}}
+      <treeComponent :subs="s.subs"></treeComponent>
+    </li>
   </ul>
 </template>
 
@@ -13,7 +14,13 @@
 export default {
   name: "treeComponent",
   props: {
-    orgcharts: { typeof: Array }
+    subs: { typeof: Array }
   }
 };
 </script>
+
+<style>
+.team {
+  padding-left: 20px;
+}
+</style>

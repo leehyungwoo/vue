@@ -10,10 +10,11 @@
           @keyup.enter="addNewTodo"
         >
         <div class="list-group">
-          <template v-for="(todo,i) in todoList">
+          {{activeTodoList()}}
+          <template v-for="(todo,i) in activeTodoList()">
+
             <button
               class="list-group-item text-left"
-              :key="i"
               :class="todo.state"
               @click="toggleTodoState(todo)"
             >
@@ -33,23 +34,27 @@ export default {
   data() {
     return {
       userInput: "",
-      todoList: [],
-      state: true
+      todoList: []
     };
   },
   methods: {
+    activeTodoList() {
+      return this.todoList.filter(function(todo) {
+        return todo.state === "active";
+      });
+    },
     addNewTodo() {
       this.todoList.push({
         label: this.userInput,
-        state: ""
+        state: "active"
       });
       this.userInput = "";
     },
     toggleTodoState(todo) {
-      if (todo.state === "") {
+      if (todo.state === "done") {
         todo.state = "active";
       } else if (todo.state === "active") {
-        todo.state = "";
+        todo.state = "done";
       }
     }
   }

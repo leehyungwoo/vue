@@ -9,10 +9,9 @@
           class="form-control mb-4"
           @keyup.enter="addNewTodo"
         >
-        <div class="list-group">
-          {{activeTodoList()}}
-          <template v-for="(todo,i) in activeTodoList()">
+        <div class="list-group mb-4">
 
+          <template v-for="todo in activeTodoList">
             <button
               class="list-group-item text-left"
               :class="todo.state"
@@ -22,6 +21,20 @@
             </button>
           </template>
 
+        </div>
+        <div class="text-right">
+          <button
+            class="btn btn-sm"
+            @click="changeCurrentState('active')"
+          >할일</button>
+          <button
+            class="btn btn-sm"
+            @click="changeCurrentState('done')"
+          >완료</button>
+          <button
+            class="btn btn-sm"
+            @click="changeCurrentState('all')"
+          >전체</button>
         </div>
       </div>
     </div>
@@ -34,14 +47,20 @@ export default {
   data() {
     return {
       userInput: "",
-      todoList: []
+      todoList: [],
+      currentState: "active"
     };
   },
-  methods: {
+  computed: {
     activeTodoList() {
-      return this.todoList.filter(function(todo) {
-        return todo.state === "active";
+      return this.todoList.filter(todo => {
+        return this.currentState === "all" || todo.state === this.currentState;
       });
+    }
+  },
+  methods: {
+    changeCurrentState(state) {
+      this.currentState = state;
     },
     addNewTodo() {
       this.todoList.push({

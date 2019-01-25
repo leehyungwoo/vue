@@ -10,15 +10,11 @@
           @keyup.enter="addNewTodo"
         >
         <div class="list-group mb-4">
-
           <template v-for="todo in activeTodoList">
-            <button
-              class="list-group-item text-left"
-              :class="todo.state"
-              @click="toggleTodoState(todo)"
-            >
-              {{todo.label}}
-            </button>
+            <Todo
+              :label="todo.label"
+              @componentClick="toggleTodoState(todo)"
+            ></Todo>
           </template>
 
         </div>
@@ -42,6 +38,8 @@
 </template>
 
 <script>
+import Todo from "./components/todo";
+
 export default {
   name: "app",
   data() {
@@ -50,6 +48,9 @@ export default {
       todoList: [],
       currentState: "active"
     };
+  },
+  components: {
+    Todo
   },
   computed: {
     activeTodoList() {

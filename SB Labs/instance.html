@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>
+            vuejs는 ()=>{} 보다 function(){}를 이런 이유로 권장한다.
+        </h1>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                data1: 'dummy',
+                data2: 'dummy',
+                data3: 'dummy',
+                data4: 'dummy',
+                data5: 'dummy',
+            },
+            methods: {
+                testMethod1() {
+                    return 'dummy'
+                },
+                testMethod2() {
+                    return 'dummy'
+                },
+                testMethod3() {
+                    return 'dummy'
+                },
+                testMethod4() {
+                    return 'dummy'
+                },
+                testMethod5() {
+                    return 'dummy'
+                }
+            }
+        })
+        console.log(app)
+    </script>
+
+</body>
+
+</html>

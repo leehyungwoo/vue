@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(a,i) in arr">
+                <button @click="remove(i)">x</button>{{a}}</li>
+            <li>
+                <button @click="addup(1)">+1</button>
+                <button @click="addup(5)">+5</button>
+                <button @click="addup(10)">+10</button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                arr: [1, 2]
+
+            },
+            methods: {
+                addup(val) {
+                    var len = this.arr.length;
+                    console.log(len)
+                    for (var i = len + 1; i <= len + val; i++) {
+                        this.arr.push(i)
+                    }
+                },
+                remove(ind) {
+                    this.arr.splice(ind, 1)
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

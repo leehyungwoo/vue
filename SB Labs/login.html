@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!-- <div id="loginBox"></div>
+
+    <script>
+        var loginBox = document.getElementById('loginBox');
+        var is_Login = false;
+
+        var btn = document.createElement('button')
+        btn.innerHTML = "로그인";
+        loginBox.appendChild(btn)
+
+        document.querySelectorAll('div')[0].addEventListener('click', function () {
+            is_Login = !is_Login;
+            if (is_Login) {
+                btn.innerHTML = "로그아웃";
+            } else {
+                btn.innerHTML = "로그인";
+            }
+        })
+
+    </script> -->
+    <div id="app">
+        <button v-if="abc" @click="toggleMethod()">로그인</button>
+        <button v-else @click="toggleMethod()">로그아웃</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                abc: true
+            },
+            methods: {
+                toggleMethod: function () {
+                    this.abc = !this.abc
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

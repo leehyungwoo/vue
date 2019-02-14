@@ -1,0 +1,108 @@
+var app = new Vue({
+    el: '#app',
+    data: {
+        userVal: null,
+        comVal: null,
+        count: 3,
+        userLife: 3,
+        comLife: 3,
+        logs: [],
+    },
+    watch: {
+        logs() {
+            setTimeout(() => {
+                this.count = 3;
+            }, 500)
+        },
+        userLife(newVal) {
+            if (newVal === 0) {
+                alert('끝')
+            }
+        },
+        comLife(newVal) {
+            if (newVal === 0) {
+                alert('끝')
+            }
+        },
+    },
+    computed: {
+        /* src값체크 */
+        userSrcImg: function () {
+            var val = this.userVal;
+            var result = "images/" + val + '.jpg';
+            return result
+        },
+        comSrcImg: function () {
+            var val = this.comVal;
+            var result = "images/" + val + '.jpg';
+            return result
+        },
+    },
+    methods: {
+        /* 시작 */
+        startGame: function () {
+            var countTimer = setInterval(() => {
+                this.count--
+                if (this.count === 0) {
+                    clearInterval(countTimer)
+                    this.Comselect()
+                }
+            }, 200)
+        },
+        /* 컴퓨터계산 */
+        Comselect: function () {
+            var ran = Math.random();
+            console.log(ran)
+            if (ran < 0.333) {
+                this.comVal = 'scissor';
+            } else if (0.333 < ran && ran < 0.666) {
+                this.comVal = 'rock';
+            } else if (0.666 < ran && ran < 0.999) {
+                this.comVal = 'paper';
+            } else {
+                console.log('error')
+            }
+            this.result()
+        },
+        /*승패값 state저장*/
+        loginit: function (val) {
+            if (val === "lose") {
+                this.userLife--;
+            } else if (val === "win") {
+                this.comLife--;
+            } else {
+
+            }
+            return {
+                val: val,
+                msg: 'User :' + this.userVal + ', comVal :' + this.comVal + ',' + val
+            }
+        },
+        /* 승패 */
+        result: function () {
+            if (this.userVal === this.comVal) {
+                var v = this.loginit('m');
+                this.logs.unshift(v)
+            } else if (this.userVal === 'scissor' && this.comVal === 'rock') {
+                var v = this.loginit('lose');
+                this.logs.unshift(v)
+            } else if (this.userVal === 'scissor' && this.comVal === 'paper') {
+                var v = this.loginit('win');
+                this.logs.unshift(v)
+            } else if (this.userVal === 'rock' && this.comVal === 'paper') {
+                var v = this.loginit('lose');
+                this.logs.unshift(v)
+            } else if (this.userVal === 'rock' && this.comVal === 'scissor') {
+                var v = this.loginit('win');
+                this.logs.unshift(v)
+            } else if (this.userVal === 'paper' && this.comVal === 'scissor') {
+                var v = this.loginit('lose');
+                this.logs.unshift(v)
+            } else if (this.userVal === 'paper' && this.comVal === 'rock') {
+                var v = this.loginit('win');
+                this.logs.unshift(v)
+            }
+        }
+    }
+})
+

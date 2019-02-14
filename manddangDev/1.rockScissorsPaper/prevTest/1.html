@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding-top: 40px;
+        }
+
+        #app {
+            margin: 0 auto;
+            width: 500px;
+            text-align: center;
+
+        }
+
+        #app:after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .user {
+            width: 140px;
+            float: left;
+        }
+
+        span.count {
+            text-align: center;
+            font-size: 30px;
+            line-height: 160px;
+        }
+
+        p.result {
+            clear: both;
+
+        }
+
+        .computer {
+            width: 140px;
+            float: right;
+        }
+
+        img {
+            vertical-align: middle;
+            height: 160px;
+            width: 140px;
+            background: url('./img/rsp.gif') no-repeat left top;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="gameOver">{{gameOver}}</p>
+        <div class="user">
+            <img ref="userImg">
+            <div class="user-life">life:{{userLife}}</div>
+            <input type="radio" name="rsp" :value="comArr[0]" id="scissors" v-model="userVal"> <label
+                for="scissors">{{comArr[0]}}</label>
+            <input type="radio" name="rsp" :value="comArr[1]" id="rock" v-model="userVal"><label
+                for="rock">{{comArr[1]}}</label>
+            <input type="radio" name="rsp" :value="comArr[2]" id="paper" v-model="userVal"><label
+                for="paper">{{comArr[2]}}</label>
+            <button @click="startGame" v-if='btnStatus'>시작</button>
+            <button v-else='btnStatus'>진행중</button>
+        </div>
+        <span class="count">{{count}}</span>
+        <div class="computer">
+            <img ref="comImg">
+            <div class="computer-life">life:{{comLife}}</div>
+            <p>{{comVal}}</p>
+        </div>
+
+        <p class="result">{{result}}</p>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                comArr: ['가위', '바위', '보'],// 0,1,2
+                count: 3,
+                comVal: '생각중..',
+                userVal: '',
+                result: '',
+                userLife: 3,
+                comLife: 3,
+                btnStatus: true
+            },
+            created() { console.log('created') },
+            mounted() { console.log('mounted') },
+            updated() { console.log('updated') },
+            watch: {
+                userVal(val) {
+                    var userImg = this.$refs.userImg
+                    this.rpsImg(userImg, val)
+                }
+            },
+            computed: {
+                gameOver() {
+                    if (this.userLife === 0) {
+                        return '컴퓨터승';
+                    } else if (this.comLife === 0) {
+                        return '유저승'
+                    } else {
+                        return '진행중';
+                    }
+                }
+            },
+            methods: {
+                rpsImg(target, val) {
+                    switch (val) {
+                        case '가위':
+                            target.style.backgroundPosition = "-140px 0"
+                            break;
+                        case '바위':
+                            target.style.backgroundPosition = "0px 0"
+                            break;
+                        case '보':
+                            target.style.backgroundPosition = "-280px 0"
+                            break;
+                        default:
+                            console.log('에러')
+                    }
+                },
+                startGame() {
+                    this.btnStatus = false;
+                    var that = this;
+                    var timer = setInterval(function () {
+                        that.count--;
+                        if (that.count === 0) {
+                            clearInterval(timer)
+                            that.computerResult()
+                            that.count = 3;
+                        }
+                    }, 1000)
+                },
+                computerResult() {
+                    var ran = Math.floor(Math.random() * 3)
+                    this.comVal = this.comArr[ran];
+                    var comImg = this.$refs.comImg;
+                    this.rpsImg(comImg, this.comVal)
+                    this.gameResult(this.userVal, this.comVal)
+                },
+                gameResult(userVal, comVal) {
+                    if (userVal === "가위") {
+
+                        if (comVal === "가위") {
+                            this.result = "비김";
+                        } else if (comVal === "바위") {
+                            this.result = "짐";
+                            this.userLife--
+                        } else if (comVal === "보") {
+                            this.result = "이김";
+                            this.comLife--
+                        } else {
+                            console.log('error')
+                        }
+
+
+                    } else if (userVal === "바위") {
+                        if (comVal === "가위") {
+                            this.result = "이김";
+                            this.comLife--
+                        } else if (comVal === "바위") {
+                            this.result = "비김";
+                        } else if (comVal === "보") {
+                            this.result = "짐";
+                            this.userLife--
+                        } else {
+                            console.log('error')
+                        }
+
+                    } else if (userVal === "보") {
+                        if (comVal === "가위") {
+                            this.result = "짐";
+                            this.userLife--
+                        } else if (comVal === "바위") {
+                            this.result = "이김";
+                            this.comLife--
+                        } else if (comVal === "보") {
+                            this.result = "비김";
+                        } else {
+                            console.log('error')
+                        }
+
+                    } else {
+                        console.log('error')
+                    }
+                    this.btnStatus = true;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

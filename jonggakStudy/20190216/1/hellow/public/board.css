@@ -1,0 +1,43 @@
+
+* {
+            margin: 0;
+            padding: 0;
+        }
+
+        .board {
+            padding: 40px;
+            margin: 0 auto
+        }
+
+        .board a {
+            text-decoration: none;
+            color: #333
+        }
+
+        .table thead tr:first-child th {
+            background: black;
+            color: #fff;
+        }
+
+        .table th{
+                text-align:center;
+        }
+        .table tr td:nth-of-type(1) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+            white-space: nowrap;
+        }
+
+        .paginationWrap {
+            overflow: hidden;
+        }
+
+        .pagination>li.page-item {
+            display: inline-block;
+        }
+
+        .pagination {
+            display: block;
+            text-align: center;
+        }

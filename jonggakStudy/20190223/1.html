@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <input type="text" v-model="input" @keypress.enter="addFunc">
+        <button @click="addFunc">추가</button>
+        <span>*추가는 엔터로 가능</span>
+        <ul>
+            <li v-for="(todo,index) in todos">
+                {{todo.text}},{{todo.text2}}
+
+                <button v-if="todo.updateToggle" @click="updateTarget(index,todo)">수정하기</button>
+
+                <div v-else style="display:inline-block">
+                    <input type="text" v-model="updataInp">
+                    <button @click="updateFunc(index)">수정</button>
+                </div>
+
+                <button @click="delteFunc(index)">제거</button>
+            </li>
+        </ul>
+        <button @click="addFunc">add</button>
+        <button @click="minFunc">remove</button>
+        <button @click="backupFunc">backup</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                abc: '',
+                input: '',
+                updataInp: '',
+                update: true,
+                flag: false,
+                backup: null,
+                todos: [
+                ]
+            },
+
+            methods: {
+                tt() {
+                    debugger
+                },
+                addFunc() {
+                    if (!this.input || !this.input.trim()) {
+                        alert('값을 입력해주세요')
+                        return false;
+                    }
+                    var len = this.todos.length;
+                    this.todos.push({ text: len, text2: this.input, updateToggle: true })
+                    this.input = "";
+                    this.flag = false;
+                },
+                minFunc() {
+                    if (this.todos.length !== 0) {
+                        this.backup = this.todos.pop()
+                        this.flag = true;
+                    } else {
+                        alert('리스트가 없습니다')
+                    }
+                },
+                backupFunc() {
+                    if (this.todos.length >= 0 && this.flag === true) {
+                        this.todos.push(this.backup)
+                        this.flag = false;
+                    } else {
+                        alert('remove해야 backup이 가능합니다')
+                    }
+                },
+                updateTarget(index, todo) {
+                    if (this.update) {
+                        this.updataInp = todo.text2
+                        this.todos[index].updateToggle = !this.todos[index].updateToggle
+                        this.update = false;
+                    } else {
+                        return false;
+                    }
+                },
+                updateFunc(index) {
+                    this.todos[index].text2 = this.updataInp;
+                    this.todos[index].updateToggle = !this.todos[index].updateToggle
+                    this.updataInp = "";
+                    this.update = true;
+                },
+                delteFunc(index) {
+                    this.todos.splice(index, 1)
+                }
+            }
+        })
+    </script>
+    <hr>
+
+
+</body>
+
+</html>

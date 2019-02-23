@@ -10,7 +10,6 @@
 
 <body>
     <div id="app">
-
         <input type="text" v-model="input" @keypress.enter="addFunc">
         <button @click="addFunc">추가</button>
         <span>*추가는 엔터로 가능</span>
@@ -47,10 +46,9 @@
             },
 
             methods: {
-                tt() {
-                    debugger
-                },
+
                 addFunc() {
+                    debugger;
                     if (!this.input || !this.input.trim()) {
                         alert('값을 입력해주세요')
                         return false;
@@ -93,6 +91,7 @@
                 },
                 delteFunc(index) {
                     this.todos.splice(index, 1)
+                    this.update = true;
                 }
             }
         })

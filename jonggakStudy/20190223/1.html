@@ -35,7 +35,6 @@
         var app = new Vue({
             el: '#app',
             data: {
-                abc: '',
                 input: '',
                 updataInp: '',
                 update: true,
@@ -44,11 +43,8 @@
                 todos: [
                 ]
             },
-
             methods: {
-
                 addFunc() {
-                    debugger;
                     if (!this.input || !this.input.trim()) {
                         alert('값을 입력해주세요')
                         return false;

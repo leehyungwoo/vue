@@ -9,35 +9,48 @@ const us = [
 
 router.get('/', function (req, res, next) {
     User.find()
-    .then((r)=>{
-        console.log('성공')
-        res.send({ users: r });
-    }).catch((err)=>{
-       return console.error(err)
-    })
+        .then((r) => {
+            console.log('성공')
+            res.send({ success: true, users: r });
+        }).catch((err) => {
+            return console.error(err)
+        })
 });
 
 router.post('/', function (req, res, next) {
-    const {name,age} = req.body
+    const { name, age } = req.body
     const u = new User({
         name,
         age
     })
     console.log(u)
-    u.save().then((r)=>{
+    u.save().then((r) => {
         res.send({ success: true, msg: r });
-    }).catch((err)=>{
-       return console.error(err)
+    }).catch((err) => {
+        return console.error(err)
     })
 });
 
-router.put('/', function (req, res, next) {
-    console.log(req.body)
-    res.send({ success: true, msg: 'put ok' });
+router.put('/:id', function (req, res, next) {
+    const id = req.params.id
+    const { name, age } = req.body
+    User.updateOne({ _id: id }, { $set: { name, age } })
+        .then((r) => {
+            res.send({ success: true, msg: r });
+        }).catch((err) => {
+            return console.error(err)
+        })
+    // res.send({ success: true, msg: 'put ok' });
 });
 
-router.delete('/', function (req, res, next) {
-    console.log(req.query)
+router.delete('/:id', function (req, res, next) {
+    const id = req.params.id
+    User.deleteOne({ _id: id })
+        .then((r) => {
+            res.send({ success: true, msg: r });
+        }).catch((err) => {
+            return console.error(err)
+        })
     res.send({ success: true, msg: 'delete ok' });
 });
 

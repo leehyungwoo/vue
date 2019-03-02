@@ -44,18 +44,18 @@ const User = require('./models/user.js')
 
 mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, function (err, db) {
     if (err) {
-        console.log('에러')
-       return console.error(err);
+        console.log('몽구스에러')
+        return console.error(err);
     }
-    console.log('커넥티드')
+    console.log('몽구스커넥티드')
     // User.deleteMany().then( r =>console.log(r))
     // .catch(e=>console.log(e))
-    
+
 
     // User.create({name:'하하'})
     // .then( r =>console.log(r))
     // .catch(e=>console.log(e))
-    
+
     // R
     // User.find()
     //    .then( r =>console.log(r))

@@ -29,19 +29,23 @@
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Application</v-toolbar-title>
+
     </v-toolbar>
+
     <v-content>
       <v-container fluid>
         <v-layout
           justify-center
           align-center
         >
+
           <v-flex text-xs-center>
             <routerView></routerView>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
+
     <v-footer
       color="indigo"
       app

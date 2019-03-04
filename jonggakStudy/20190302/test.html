@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus��">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+
+
+    <div id="app">
+        <h1>unOrder List</h1>
+        <todo-list :proplist="ArrList"></todo-list>
+
+    </div>
+
+
+
+    <script>
+
+        Vue.component('todo-list', {
+            template: "<ul><li v-for='itm in proplist' >{{itm}}</li></ul>",
+            props: ['proplist'],
+            mounted() {
+                console.log(this.proplist)
+            }
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                ArrList: ['사과', '배', '바나나', '포도', '귤']
+            },
+
+        })
+
+    </script>
+
+
+
+</body>
+
+</html>

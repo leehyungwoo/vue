@@ -28,7 +28,7 @@
       app
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>{{$apiRootPath}}</v-toolbar-title>
 
     </v-toolbar>
 

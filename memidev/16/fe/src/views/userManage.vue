@@ -246,7 +246,7 @@ export default {
   methods: {
     getReq() {
       this.axios
-        .get("http://localhost:3000/api/user", {
+        .get(`${this.$apiRootPath}user`, {
           params: {
             user: "getman"
           }
@@ -260,7 +260,7 @@ export default {
     },
     postReq() {
       this.axios
-        .post("http://localhost:3000/api/user", { name: "가정", age: 444 })
+        .post(`${this.$apiRootPath}user`, { name: "가정", age: 444 })
         .then(r => {
           this.postMd = JSON.stringify(r.data);
         })
@@ -270,7 +270,7 @@ export default {
     },
     putReq() {
       this.axios
-        .put("http://localhost:3000/api/user", { user: "postman" })
+        .put(`${this.$apiRootPath}user`, { user: "postman" })
         .then(r => {
           this.putMd = JSON.stringify(r.data);
         })
@@ -280,7 +280,7 @@ export default {
     },
     delReq() {
       this.axios
-        .delete("http://localhost:3000/api/user")
+        .delete(`${this.$apiRootPath}user`)
         .then(r => {
           this.delMd = JSON.stringify(r.data);
         })
@@ -297,7 +297,7 @@ export default {
     postUser() {
       this.dialog = false;
       this.axios
-        .post("http://localhost:3000/api/user", {
+        .post(`${this.$apiRootPath}user`, {
           name: this.userName,
           age: this.userAge
         })
@@ -312,7 +312,7 @@ export default {
     },
     getUsers() {
       this.axios
-        .get("http://localhost:3000/api/user", {
+        .get(`${this.$apiRootPath}user`, {
           params: {
             user: "getman"
           }
@@ -333,7 +333,7 @@ export default {
     },
     putUser() {
       this.axios
-        .put(`http://localhost:3000/api/user/${this.putId}`, {
+        .put(`${this.$apiRootPath}user/${this.putId}`, {
           name: this.userName,
           age: this.userAge
         })
@@ -349,7 +349,7 @@ export default {
     },
     delUser(id) {
       this.axios
-        .delete(`http://localhost:3000/api/user/${id}`)
+        .delete(`${this.$apiRootPath}user/${id}`)
         .then(r => {
           console.log(r);
           this.pop("사용자 삭제완료");

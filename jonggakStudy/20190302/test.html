@@ -26,10 +26,8 @@
 
         Vue.component('todo-list', {
             template: "<ul><li v-for='itm in proplist' >{{itm}}</li></ul>",
-            props: ['proplist'],
-            mounted() {
-                console.log(this.proplist)
-            }
+            props: ['proplist']
+     
         })
 
         new Vue({

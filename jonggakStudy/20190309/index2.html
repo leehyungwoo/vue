@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script src="https://unpkg.com/vue@2.6.8/dist/vue.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <style>
+        label {
+            width: 55px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<!-- 컴포넌트 두개만들어서 하나는 숫자입력받고 부모에서 숫자두개 받고,  자식에서 덧셈 뺄셈 나누기 곱하기 보여주기-->
+
+<body>
+
+    <div id="app-m">
+        <div @click="clickMethod" style='width:200px;height:100px;background:red'>
+            <inputcom :test="aaa">
+                <!-- <input2com :test="aaa">
+            <input3com :test="aaa">
+            <input4com :test="aaa"> -->
+        </div>
+    </div>
+    <script>
+        Vue.component('inputcom', {
+            props: ['test'],
+            data: function () {
+                return {
+                    val: this.test
+                }
+            },
+            updated() {
+                this.aa()
+            },
+
+            methods: {
+                childFunc() {
+                    console.log('바뀜')
+                },
+                aa() {
+                    console.log('실험')
+
+
+                }
+            },
+            template: `
+            <div style="background:blue">
+                hi
+                {{test}}
+                <button  > 버튼 </button>
+                </div>
+            `
+        })
+
+        new Vue({
+            el: '#app-m',
+            data: {
+                aaa: false
+            },
+            methods: {
+
+                clickMethod() {
+                    this.aaa = !this.aaa
+                }
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

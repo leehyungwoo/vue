@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script src="https://unpkg.com/vue@2.6.8/dist/vue.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <style>
+        label {
+            width: 55px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<!-- 컴포넌트 두개만들어서 하나는 숫자입력받고 부모에서 숫자두개 받고,  자식에서 덧셈 뺄셈 나누기 곱하기 보여주기-->
+
+<body>
+
+    <div id="app-m">
+        <calculate>
+
+        </calculate>
+    </div>
+    <script>
+
+        Vue.component('listmincom', {
+
+            data() {
+                return {
+
+                }
+            },
+            props: ['propData']
+            ,
+            template: `
+            <li>
+                {{propData}}
+                 
+            </li>
+            `
+        })
+
+        Vue.component('listsumcom', {
+
+            data() {
+                return {
+                    obj: this.propData
+                }
+            },
+            props: ['propData']
+            ,
+
+            template: `
+            <li>
+
+                {{obj}}
+                 
+            </li>
+            `
+        })
+
+        Vue.component('inputcom', {
+            data() {
+                return {
+                    obj: {
+                        a: '',
+                        b: ''
+                    }
+                }
+            },
+            methods: {
+
+                computed() {
+                    this.obj.a = parseInt(this.obj.a)
+                    this.obj.b = parseInt(this.obj.b)
+                    this.$emit('val', this.obj)
+
+                }
+            },
+            template: `
+            <div>      
+                <input type="text" v-model="obj.a">
+                <input type="text" v-model="obj.b">
+                <button @click="computed">계산</button>
+            </div>
+            `
+        })
+
+
+        Vue.component('calculate', {
+            data() {
+                return {
+                    obj: {
+                        a: 'a',
+                        b: 'b'
+                    }
+                }
+            },
+            updated() {
+                this.functest()
+            },
+            template: `
+            <div>
+               <inputcom v-on:val="test" ></inputcom>
+               <ul>
+                {{obj}}
+               
+               <listsumcom :propData="obj"></listsumcom>
+               <listmincom :propData="functest()"></listmincom>
+                 
+                </ul>
+            </div>
+            `,
+
+            methods: {
+                test(obj) {
+                    this.obj = obj
+                },
+
+                functest() {
+                    return this.obj
+                }
+
+
+            }
+        })
+
+        new Vue({
+            el: '#app-m',
+
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>

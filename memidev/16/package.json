@@ -6,5 +6,7 @@
         "serve": "cd fe && npm run serve",
         "pr": "cd fe && npm i && npm run build && cd ../be && npm i && cd ..&& set NODE_ENV=production && set PORT=80 && nodemon ./be/bin/www"
     },
-    "dependencies": {}
+    "dependencies": {
+        "pm2": "^3.4.0"
+    }
 }

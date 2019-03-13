@@ -39,13 +39,15 @@ app.use(function (err, req, res, next) {
     res.send({ msg: err.message });
 });
 
-module.exports = app;
-
 
 const mongoose = require('mongoose');
 const User = require('./models/user.js')
+console.log(`${process.env.NODE_ENV} started!`)
 
-mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, function (err, db) {
+const cfg = require('../config')
+console.log(cfg)
+
+mongoose.connect(cfg.dbUrl, { useNewUrlParser: true }, function (err, db) {
     if (err) {
         console.log('몽구스에러')
         return console.error(err);
@@ -86,4 +88,9 @@ mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, fu
     //    })
     //    .catch(e=>console.log(e))     
 })
+
+
+
+module.exports = app;
+
 

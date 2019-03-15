@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
 const cors = require('cors')
 // var history = require('express-history-api-fallback')
 
@@ -31,9 +32,9 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
+
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
     // render the error page
     res.status(err.status || 500);
     res.send({ msg: err.message });
@@ -90,7 +91,26 @@ mongoose.connect(cfg.dbUrl, { useNewUrlParser: true }, function (err, db) {
 })
 
 
+// const aaa = (t) => {
+//     return new Promise((resolve, reject) => {
+//         console.log('a', new Date().toLocaleString())
+//         setTimeout(() => {
+//             reject(new Error('error났음'))
+//             console.log('b', new Date().toLocaleString())
+//             resolve('ok')
+//         }, t)
+//     })
+// }
+
+// aaa(2000).then(r => { console.log('r', r) })
+//     .catch((e) => { console.log(e.message) })
 
 module.exports = app;
 
-
+var jwt = require('jsonwebtoken');
+const key = "암호화방식의나만의어려운어려운키"
+var token = jwt.sign({ id: 'shine', email: 'leewoo@xxx.com' }, key);
+console.log(token) // bar
+var decoded = jwt.verify(token, key);
+console.log(decoded) // bar
+// console.log(new Date(decoded.iat * 1000))

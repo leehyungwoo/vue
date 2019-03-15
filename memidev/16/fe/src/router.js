@@ -18,6 +18,11 @@ export default new Router({
             name: 'userManage',
             component: () => import('./views/userManage.vue')
         },
+        {
+            path: '/header',
+            name: '헤더',
+            component: () => import('./views/headers.vue')
+        },
 
     ]
 })

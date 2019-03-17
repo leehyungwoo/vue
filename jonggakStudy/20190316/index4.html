@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script src="https://unpkg.com/vue@2.6.9/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app-m">
+        {{Bus.BusState}}
+        <child-component></child-component>
+        <sibling-component></sibling-component>
+    </div>
+    <script>
+
+        var Bus = new Vue({
+            data: {
+                BusState: { a: 1, b: 2 }
+            },
+            methods: {
+                BusData(v) {
+                    this.BusState.a++
+                    this.BusState.b++
+                }
+            }
+        })
+
+        Vue.component('sibling-component', {
+            template: `<div>
+            형제 컴포넌트 영역입니다. 형제에서 버스 접근가능 <button @click="BusDataView">버스데이터 $on $emit메서드 쓰기 </button>
+            <button @click="BusDataPlus">버스데이터 더하기</button> 
+            </div>`,
+            methods: {
+                BusDataView() {
+                    Bus.$emit('pipeBusData')
+                },
+                BusDataPlus() {
+                    Bus.BusData()
+                }
+            }
+        });
+
+        Vue.component('child-component', {
+            template: '<div>하위 컴포넌트 영역입니다.<button v-on:click="BusDataChange">버스데이터 보기</button></div>',
+            created() {
+                Bus.$on('pipeBusData', function () {
+                    console.log('실행')
+                })
+            },
+            methods: {
+                BusDataChange: function () {
+                    console.log(Bus.BusState.a)
+                    console.log(Bus.BusState.b)
+                }
+            }
+        });
+
+        var app_m = new Vue({
+            el: '#app-m'
+        })
+    </script>
+
+</body>
+
+</html>

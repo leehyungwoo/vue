@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+        label {
+            width: 55px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-m">
+        <member-insert :m_obj=m_obj :updateobj=updateobj></member-insert>
+        <member-list :todos=todos :m_obj=m_obj :updateobj=updateobj></member-list>
+    </div>
+    <script>
+
+        Vue.component('member-insert', {
+            props: ['m_obj', 'updateobj'],
+            template: `
+            <div style="padding-top:30px;width:600px;padding-left:30px;">
+                <div>
+                    <Label for="id">아이디</Label>
+                    <input type="text" id="id" v-model="m_obj.id" @keypress.enter="PushArray" />
+                </div>
+                <div style="margin: 7px 0px">
+                        <Label for="name">이름</Label>
+                        <input type="text" id="name" v-model="m_obj.name" @keypress.enter="PushArray" />
+                </div>
+                <div style="margin-left: 50px">
+                    <button v-if="!updateobj" v-on:click="PushArray">추가</button> 
+                    <button v-else v-on:click="UpdateArray">수정</button>
+                </div>
+            </div> `
+            ,
+            methods: {
+                PushArray: function () {
+                    if (!this.Vail()) return false;
+                    window.app_m.todos.push({
+                        pk: Date.now()
+                        , id: this.m_obj.id
+                        , name: this.m_obj.name
+                        , state: 1
+                        , RegTime: new Date().toLocaleTimeString()
+                        , WdTime: null
+                    });
+                    this.MObjReSet();
+                },
+                UpdateArray() {
+                    if (window.app_m.updateobj) {
+                        if (!this.Vail()) return false;
+                        window.app_m.updateobj.id = this.m_obj.id;
+                        window.app_m.updateobj.name = this.m_obj.name;
+                        this.MObjReSet();
+                        window.app_m.updateobj = null;
+                    }
+                },
+                Vail() {
+                    if (!this.m_obj.id || !this.m_obj.id.trim()) {
+                        alert("아이디을 입력해 주세요.");
+                        return false;
+                    }
+                    else if (!this.m_obj.name || !this.m_obj.name.trim()) {
+                        alert("을 입력해 주세요.");
+                        return false;
+                    }
+                    return true;
+                },
+                MObjReSet() {
+                    window.app_m.m_obj = { id: null, name: null }
+                }
+            }
+        })
+
+
+        Vue.component('member-list', {
+            props: ['todos', 'm_obj', 'updateobj'],
+            template: `
+        <div style="padding-top:30px;width:600px;padding-left:30px;">
+            <div style="font-weight: bold;margin-bottom: 3px;">회원 수 : {{todos.length}}</div>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>상태</th>
+                        <th>가입시간</th>
+                        <th>탈퇴시간</th>
+                        <th>기능</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(todo,index) in todos" @click="Detail(todo);" :key="todo.pk">
+                        <td>{{ todo.id }}</td>
+                        <td>{{ todo.name }}</td>
+                        <td>
+                            <span v-if="todo.state == 1">정상</span>
+                            <span v-else>탈퇴</span>
+                        </td>
+                        <td>{{ todo.RegTime }}</td>
+                        <td>{{ todo.WdTime }}</td>
+                        <td>  
+                            <button v-if="todo.state == 1" v-on:click="Withdraw(todo)">탈퇴</button>
+                            <button v-else-if="todo.state == 0" v-on:click="DetailPopArray(index)">삭제</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>  `
+            ,
+            methods: {
+
+                Detail(Obj) {
+                    if (event.target.nodeName == "BUTTON") return false;
+                    window.app_m.m_obj = { id: Obj.id, name: Obj.name }
+                    window.app_m.updateobj = Obj;
+                },
+                DetailPopArray(idx) {
+                    this.todos.splice(idx, 1);
+                    this.MObjReSet();
+                },
+
+                MObjReSet() {
+                    window.app_m.m_obj = { id: null, name: null }
+                },
+                Withdraw(Obj) {
+                    Obj.state = "0";
+                    Obj.WdTime = new Date().toLocaleTimeString();
+                }
+            }
+        })
+
+
+        var app_m = new Vue({
+            el: '#app-m',
+            data: {
+                todos: []
+                , m_obj: { id: null, name: null }
+                , updateobj: null
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+        label {
+            width: 55px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-m">
+        <child-component></child-component>
+        <sibling-component></sibling-component>
+    </div>
+    <script>
+
+
+        var Bus = new Vue({})
+
+
+
+
+        Vue.component('sibling-component', {
+            template: '<div>형제 컴포넌트 영역입니다</div>',
+            methods: {
+
+            },
+            mounted() {
+                Bus.$on('triggerEventBus', function (a, b) {
+                    console.log(a, b) // Bus.$emit('triggerEventBus', 100);의 100이 a에 출력
+                })
+            }
+        });
+
+
+
+        Vue.component('child-component', {
+            template: '<div>하위 컴포넌트 영역입니다.<button v-on:click="showLog">show</button></div>',
+            methods: {
+                showLog: function () {
+                    Bus.$emit('triggerEventBus', 300, 400);
+                }
+            }
+        });
+
+        var app_m = new Vue({
+            el: '#app-m',
+            data: {
+                todos: []
+                , m_obj: { id: null, name: null }
+                , updateobj: null
+            },
+            mounted() {
+                // Bus.$on('triggerEventBus', function (a, b) {
+                //     console.log(a, b) // Bus.$emit('triggerEventBus', 100);의 100이 a에 출력
+                // })
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

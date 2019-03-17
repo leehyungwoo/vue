@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+        label {
+            width: 55px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-m">
+        <child-component></child-component>
+        <sibling-component></sibling-component>
+        {{state}}
+    </div>
+    <script>
+
+        var Bus = new Vue({
+            data: {
+                BusState: { a: 1, b: 2 }
+            }
+        })
+
+        Vue.component('sibling-component', {
+            template: '<div>하위의 형제 컴포넌트 영역입니다<button v-on:click="meToShowLog">show</button></div></div>',
+            methods: {
+                meToShowLog() {
+                    console.log('Bus의 BusState.a', Bus.BusState.a)  //버스로 접근가능
+                    console.log('Bus의 BusState.a', Bus.BusState.b)
+                }
+            }
+        });
+
+        Vue.component('child-component', {
+            template: '<div>하위 컴포넌트 영역입니다.<button v-on:click="showLog">show</button></div>',
+            methods: {
+                showLog: function () {
+                    console.log('Bus의 BusState.a를 보여준후 1을더한다', Bus.BusState.a++)  //버스로 접근가능
+                    console.log('Bus의 BusState.b를 보여준후 1을더한다', Bus.BusState.b++)
+
+                }
+            }
+        });
+
+        var app_m = new Vue({
+            el: '#app-m',
+            data: {
+                state: Bus.BusState
+            }
+        })
+    </script>
+
+</body>
+
+</html>

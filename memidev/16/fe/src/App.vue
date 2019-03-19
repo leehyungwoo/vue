@@ -69,6 +69,11 @@ export default {
         title: "사용자관리",
         icon: "face",
         routeName: "userManage"
+      },
+      {
+        title: "로그인",
+        icon: "face",
+        routeName: "sign"
       }
     ]
   }),

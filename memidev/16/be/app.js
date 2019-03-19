@@ -54,8 +54,8 @@ mongoose.connect(cfg.dbUrl, { useNewUrlParser: true }, function (err, db) {
         return console.error(err);
     }
     console.log('몽구스커넥티드')
-    // User.deleteMany().then( r =>console.log(r))
-    // .catch(e=>console.log(e))
+    // User.deleteMany().then(r => console.log(r))
+    //     .catch(e => console.log(e))
 
 
     // User.create({name:'하하'})

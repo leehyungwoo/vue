@@ -23,6 +23,11 @@ export default new Router({
             name: '헤더',
             component: () => import('./views/headers.vue')
         },
+        {
+            path: '/sign',
+            name: 'sign',
+            component: () => import('./views/sign.vue')
+        },
 
     ]
 })

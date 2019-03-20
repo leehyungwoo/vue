@@ -5,7 +5,7 @@ var router = express.Router();
 router.use('/api', require('./api'))
 
 
-router.get('/', function (req, res, next) {
+router.get('/test', function (req, res, next) {
     res.send('routes')
 });
 

@@ -98,7 +98,6 @@ export default {
   mounted() {},
   methods: {
     signUp() {
-      console.log("1");
       this.$axios
         .post("/api/user", { info: this.info })
         .then(res => {

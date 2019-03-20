@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "serve": "cd fe&& npm run serve ",
-        "dev": "cd fe&& npm run build && cd ../ && cd be && nodemon ./bin/www",
+        "dev": "cd be&&nodemon ./bin/www",
+        "pre": "cd fe&& npm run build && cd ../ && cd be && nodemon ./bin/www",
         "build": "vue-cli-service build"
     }
 }

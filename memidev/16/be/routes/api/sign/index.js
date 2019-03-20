@@ -14,7 +14,6 @@ const signToken = (id, age) => {
     })
 }
 
-
 router.post('/in', (req, res) => {
     const { id, pwd } = req.body
     if (!id) return res.send({ success: false, msg: '아이디가 없습니다.' })

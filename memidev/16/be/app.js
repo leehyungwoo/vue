@@ -46,7 +46,7 @@ const User = require('./models/user.js')
 console.log(`${process.env.NODE_ENV} started!`)
 
 const cfg = require('../config')
-console.log(cfg)
+
 
 mongoose.connect(cfg.dbUrl, { useNewUrlParser: true }, function (err, db) {
     if (err) {

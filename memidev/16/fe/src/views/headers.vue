@@ -6,6 +6,7 @@
     <v-btn @click="lsRead">로컬스토리지 읽기</v-btn>
     <v-btn @click="lsRemove">로컬스토리지 지우기</v-btn>
     <v-btn @click="lsClear">로컬스토리지 비우기</v-btn>
+
   </v-container>
 </template>
 <script>
@@ -14,18 +15,21 @@ import axios from "axios";
 export default {
   methods: {
     headerSend() {
+      const token = localStorage.getItem("token");
       axios
-        .get(`${this.$apiRootPath}test`)
-        .then(r => console.log(r))
-        .catch(e => console.log(e));
+        .get(`${this.$apiRootPath}test`, {
+          headers: { Authorization: token }
+        })
+        .then(r => console.log(r.data))
+        .catch(e => console.log(e.message));
     },
     headerSend2() {
       axios
         .get(`${this.$apiRootPath}test`, {
           headers: { Authorization: "fake token!" }
         })
-        .then(r => console.log(r))
-        .catch(e => console.log(e));
+        .then(r => console.log(r.data))
+        .catch(e => console.log(e.message));
     },
     lsWrite() {
       localStorage.setItem("token", 123);

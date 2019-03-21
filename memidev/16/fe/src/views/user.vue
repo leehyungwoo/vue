@@ -147,6 +147,7 @@ export default {
         .get(`${this.$apiRootPath}manage/user`)
         .then(r => {
           this.users = r.data.users;
+          console.log(r.data.users);
         })
         .catch(e => {
           this.pop(e.message);

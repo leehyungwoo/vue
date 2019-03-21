@@ -7,8 +7,9 @@ const Page = require('../../../../models/pages')
 router.get('/', function (req, res, next) {
     Page.find()
         .then((r) => {
-            console.log('성공')
-            res.send({ success: true, users: r });
+            console.log('페이지성공')
+            console.log(r)
+            res.send({ success: true, pages: r });
         }).catch((err) => {
             return console.error(err)
         })

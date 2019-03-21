@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        /*리얼돔이 느린것이아니라, reflow, repaint계산이 느린것이다 */
+        var el = document.querySelector('.button');
+        el.style.padding = "10px"; //reflow, repaint
+        el.style.fontSize = "1.2em";//reflow, repaint
+        el.style.color = "black";// repaint
+        el.appendChild(document.createElement('div'));//reflow, repaint
+
+
+        /*realDom*/
+        document.create('div')   //반환값:  [object HTMLDivElement]
+
+        /*vitualDom*/
+        React.createElement('div')
+        vm.$createElement('div')
+        /*
+           반환값
+           {
+               tag:'div',
+               attrs:{
+                   ...
+               },
+               children:[]
+           }
+        */
+
+
+    </script>
+</body>
+
+</html>

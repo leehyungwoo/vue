@@ -7,7 +7,6 @@ const User = require('../../../../models/user')
 router.get('/', function (req, res, next) {
     User.find()
         .then((r) => {
-            console.log('성공')
             res.send({ success: true, users: r });
         }).catch((err) => {
             return console.error(err)

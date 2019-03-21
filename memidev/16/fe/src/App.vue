@@ -1,34 +1,31 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-navigation-drawer
+      persistent
       v-model="drawer"
+      enable-resize-watcher
       fixed
       app
     >
-      <v-list dense>
-        <v-list-tile
-          @click="$router.push({name:list.routeName})"
-          v-for="(list,index) in navList"
-          :key="index"
-        >
+      <v-list
+        value="true"
+        v-for="(item, i) in items"
+        :key="i"
+      >
+        <v-list-tile @click="$router.push(  item.to)">
           <v-list-tile-action>
-            <v-icon>{{list.icon}}</v-icon>
+            <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{list.title}}</v-list-tile-title>
+            <v-list-tile-title v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
-      color="indigo"
-      dark
-      fixed
-      app
-    >
+    <v-toolbar app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>{{$apiRootPath}}</v-toolbar-title>
+      <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-menu
@@ -43,14 +40,14 @@
           </v-btn>
           <v-list>
             <v-list-tile
-              v-if="!token"
-              @click="$router.push('sign')"
+              v-if="!$store.state.token"
+              @click="$router.push('/sign')"
             >
               <v-list-tile-title>로그인</v-list-tile-title>
             </v-list-tile>
             <v-list-tile
-              @click="signOut"
               v-else
+              @click="signOut"
             >
               <v-list-tile-title>로그아웃</v-list-tile-title>
             </v-list-tile>
@@ -58,91 +55,75 @@
         </v-menu>
       </v-toolbar-items>
     </v-toolbar>
-
     <v-content>
-      <v-container fluid>
-        <v-layout
-          justify-center
-          align-center
-        >
-
-          <v-flex text-xs-center>
-            <routerView></routerView>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <router-view></router-view>
     </v-content>
-
     <v-footer
-      color="indigo"
+      fixed
       app
     >
-      <span class="white--text">&copy; 2017</span>
+      <span>&copy; 2017 {{$store.state.token}}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  data: () => ({
-    drawer: null,
-    navList: [
-      {
-        title: "홈",
-        icon: "home",
-        routeName: "home"
-      },
-
-      {
-        title: "로그인",
-        icon: "face",
-        routeName: "sign"
-      },
-      {
-        title: "헤더",
-        icon: "face",
-        routeName: "header"
-      },
-      {
-        icon: "home",
-        title: "lv0",
-        routeName: "lv0"
-      },
-      {
-        icon: "home",
-        title: "lv1",
-        routeName: "lv1"
-      },
-      {
-        icon: "home",
-        title: "lv2",
-        routeName: "lv2"
-      },
-      {
-        icon: "home",
-        title: "lv3",
-        routeName: "lv3"
-      },
-      {
-        icon: "face",
-        title: "사용자관리",
-        routeName: "user"
-      },
-      {
-        icon: "face",
-        title: "페이지관리",
-        routeName: "page"
-      }
-    ]
-  }),
-  computed: {
-    ...mapState(["token"])
+  name: "App",
+  data() {
+    return {
+      drawer: null,
+      items: [
+        {
+          icon: "home",
+          title: "lv0",
+          to: {
+            path: "/"
+          }
+        },
+        {
+          icon: "home",
+          title: "lv1",
+          to: {
+            path: "/lv1"
+          }
+        },
+        {
+          icon: "home",
+          title: "lv2",
+          to: {
+            path: "/lv2"
+          }
+        },
+        {
+          icon: "home",
+          title: "lv3",
+          to: {
+            path: "/lv3"
+          }
+        },
+        {
+          icon: "face",
+          title: "사용자관리",
+          to: {
+            path: "/user"
+          }
+        },
+        {
+          icon: "face",
+          title: "페이지관리",
+          to: {
+            path: "/page"
+          }
+        }
+      ],
+      title: this.$apiRootPath
+    };
   },
   mounted() {},
   methods: {
     signOut() {
-      this.$store.commit("deleteToken");
+      this.$store.commit("delToken");
       this.$router.push("/");
     }
   }

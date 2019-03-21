@@ -19,8 +19,9 @@ router.get('/check', function (req, res, next) {
         conn.query(`SELECT * FROM info WHERE u_id=?;`, [u_id], function (error, results, fields) {
             if (error) {
                 conn.release();
-                console.log('에러');
-                throw error
+                console.log('signUp 아이디체크 에러');
+                res.json({ success: false, msg: '사용 불가능한 아이디' })
+                return
             }
             if (results.length >= 1) {
                 res.json({ success: false, msg: '이미 아이디 있음' })
@@ -35,7 +36,6 @@ router.get('/check', function (req, res, next) {
 
 router.post('/in', function (req, res, next) {
     var { u_id, u_ps, u_name, u_email } = req.body.info;
-
     crypto.randomBytes(64, (err, buf) => {
         crypto.pbkdf2(u_ps, buf.toString('base64'), 104729, 64, 'sha512', (err, key) => {
             var u_ps = key.toString('base64'); // '솔트처리된 암호'
@@ -46,6 +46,7 @@ router.post('/in', function (req, res, next) {
                     conn.release()
                     return;
                 }
+                console.log(u_name)
                 pool.query(`INSERT INTO info (u_id,u_ps,u_name,u_email,state,regDate,salt) VALUES (?,?,?,?,0,now(),?)`, [u_id, u_ps, u_name, u_email, salt],
                     function (error, results, fields) {
                         if (error) {

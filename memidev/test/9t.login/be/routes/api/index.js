@@ -9,8 +9,8 @@ router.use('/signUp', require('./signUp'))
 
 router.all('*', function (req, res, next) {
     const token = req.headers.authorization
-    console.log('토큰확인', token)
-    if (token) {
+
+    if (!token === 'null') {
         jwt.verify(token, cfg.privateKey, (err, userInfo) => {
             if (err) {
                 console.log('토큰확인에러', err)
@@ -18,8 +18,10 @@ router.all('*', function (req, res, next) {
             }
             res.json({ userInfo })
         })
+        next()
+    } else {
+        next()
     }
-    next()
 
 });
 

@@ -47,8 +47,6 @@ export default new Vuex.Store({
         signUp({ commit, state }, payload) {
             axios.post('/api/login', payload).then((res) => {
                 if (res.data.success) {
-                    console.log('로그인')
-
                     return commit('loginSuccess', res.data)
                 } else {
                     console.log('로그인실패')

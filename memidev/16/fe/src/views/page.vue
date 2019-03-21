@@ -155,7 +155,6 @@ export default {
           lv: this.pageLv
         })
         .then(r => {
-          console.log(r);
           this.pop("페이지 수정 완료");
           this.getPages();
         })
@@ -167,8 +166,6 @@ export default {
       this.$axios
         .delete(`${this.$apiRootPath}manage/page/${id}`)
         .then(r => {
-          console.log(r);
-
           this.pop("페이지 삭제 완료");
           this.getPages();
         })

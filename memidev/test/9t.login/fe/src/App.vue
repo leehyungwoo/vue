@@ -7,36 +7,16 @@
     >
       <v-list dense>
 
-        <v-list-tile @click="$router.push({name:'home'})">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-
         <v-list-tile
-          v-if="!$store.state.isLogin"
-          @click="$router.push({name:'login'})"
+          v-for="(item,idx) in items"
+          :key="idx"
+          @click="$router.push({name:item.routerName})"
         >
           <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
+            <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Login</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-
-        <v-list-tile
-          v-else
-          @click="$router.push({name:'myPage'})"
-        >
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>myPage</v-list-tile-title>
+            <v-list-tile-title>{{item.title}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -97,20 +77,48 @@
 <script>
 export default {
   data: () => ({
-    drawer: null
+    drawer: null,
+    items: [
+      {
+        title: "login",
+        icon: "contact_mail",
+        routerName: "login"
+      },
+      {
+        title: "Home",
+        icon: "home",
+        routerName: "home"
+      },
+      {
+        title: "MyPage",
+        icon: "contact_mail",
+        routerName: "myPage"
+      },
+      {
+        title: "v0",
+        icon: "contact_mail",
+        routerName: "v0"
+      },
+      {
+        title: "v1",
+        icon: "contact_mail",
+        routerName: "v1"
+      },
+      {
+        title: "v2",
+        icon: "contact_mail",
+        routerName: "v2"
+      },
+      {
+        title: "v3",
+        icon: "contact_mail",
+        routerName: "v3"
+      }
+    ]
   }),
   props: {
     source: String
   },
-  methods: {
-    abc() {
-      console.log(this.$router);
-      this.router.push({ name: "login" });
-    },
-    func() {
-      console.log(this.router);
-      this.router.push({ name: "home" });
-    }
-  }
+  methods: {}
 };
 </script>

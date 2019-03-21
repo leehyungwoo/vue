@@ -59,7 +59,7 @@
             <v-spacer></v-spacer>
             <v-btn
               color="primary"
-              @click="singIn()"
+              @click="signIn()"
             >Login</v-btn>
           </v-card-actions>
         </v-card>
@@ -77,17 +77,15 @@ export default {
     };
   },
   methods: {
-    singIn() {
-      this.axios
+    signIn() {
+      axios
         .post(`${this.$apiRootPath}sign/in`, this.form)
         .then(r => {
-          console.log(r.data);
-          if (!r.data.success) {
-            return console.error(r.data.msg);
-          }
+          if (!r.data.success) return console.error(r.data.msg);
           localStorage.setItem("token", r.data.token);
           this.$store.commit("getToken");
-          this.$router.push("/header");
+          this.$router.push("/");
+          // location.href = '/header'
         })
         .catch(e => console.error(e.message));
     }

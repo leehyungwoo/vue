@@ -5,12 +5,9 @@ import store from './store'
 Vue.use(Router)
 
 
-
-
 const signUpAuth = (to, from, next) => {
     //로그인 했으면 홈으로
     console.log(store.state.isLogin)
-
     if (store.state.isLogin) {
         next('/')
     } else {
@@ -57,6 +54,36 @@ export default new Router({
             name: 'myPage',
             beforeEnter: noneSignUpAuth,
             component: () => import(/* webpackChunkName: "Mypage" */ './views/MyPage.vue')
+        },
+        {
+            path: '/mypage',
+            name: 'myPage',
+            beforeEnter: noneSignUpAuth,
+            component: () => import(/* webpackChunkName: "Mypage" */ './views/MyPage.vue')
+        },
+        {
+            path: '/v0',
+            name: 'v0',
+            beforeEnter: noneSignUpAuth,
+            component: () => import(/* webpackChunkName: "v0" */ './views/v0.vue')
+        }, ,
+        {
+            path: '/v1',
+            name: 'v1',
+            beforeEnter: noneSignUpAuth,
+            component: () => import(/* webpackChunkName: "v1" */ './views/v1.vue')
+        }, ,
+        {
+            path: '/v2',
+            name: 'v2',
+            beforeEnter: noneSignUpAuth,
+            component: () => import(/* webpackChunkName: "v2" */ './views/v2.vue')
+        }, ,
+        {
+            path: '/v3',
+            name: 'v3',
+            beforeEnter: noneSignUpAuth,
+            component: () => import(/* webpackChunkName: "v3" */ './views/v3.vue')
         },
 
     ]

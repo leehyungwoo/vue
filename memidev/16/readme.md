@@ -9,7 +9,7 @@ module.exports = {
 
 ```
 이런식으로 디비 연결 문자열을 작성해야 웹서버가 정상 구동됨.
-
+배포시에 반드시 config그 ignore처리하기.
 ## sh 실행방법
 ```
 sh bs.sh

@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var cfg = require('../../config')
 
-module.exports = mysql.createPool({
+var pool = mysql.createPool({
     connectionLimit: 10,
     host: cfg.mysql.host,
     user: cfg.mysql.user,
@@ -10,4 +10,14 @@ module.exports = mysql.createPool({
 });
 
 
+pool.query('select * from info', function (error, results, fields) {
+    if (error) {
+        console.log('mysql createPool be/models/user 에러')
+        throw error;
+    }
+    console.log('mysql createPool be/models/user 진행');
+});
+
+
+module.exports = pool
 

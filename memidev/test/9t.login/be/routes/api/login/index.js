@@ -10,12 +10,12 @@ var cfg = require("../../../../config")
 // });
 
 
-
 router.post('/', function (req, res, next) {
     const { u_id, u_ps } = req.body
 
     pool.getConnection(function (err, conn) {
         if (err) {
+            console.log('풀겟커넥션에러')
             conn.release()
             return;
         }

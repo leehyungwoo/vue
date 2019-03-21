@@ -3,43 +3,40 @@ var createError = require('http-errors');
 var router = express.Router();
 const Page = require('../../../../models/pages')
 
-
 router.get('/', function (req, res, next) {
     Page.find()
-        .then((r) => {
-            console.log('페이지성공')
-            console.log(r)
-            res.send({ success: true, pages: r });
-        }).catch((err) => {
-            return console.error(err)
+        .then(r => {
+            res.send({ success: true, pages: r })
+        })
+        .catch(e => {
+            res.send({ success: false })
         })
 });
 
-router.put('/:_id', function (req, res, next) {
+router.put('/:_id', (req, res, next) => {
     const _id = req.params._id
     Page.updateOne({ _id }, { $set: req.body })
-        .then((r) => {
-            res.send({ success: true, msg: r });
-        }).catch((err) => {
-            return console.error(err)
+        .then(r => {
+            res.send({ success: true, msg: r })
         })
-    // res.send({ success: true, msg: 'put ok' });
-});
+        .catch(e => {
+            res.send({ success: false, msg: e.message })
+        })
+})
 
-router.delete('/:_id', function (req, res, next) {
+router.delete('/:_id', (req, res, next) => {
     const _id = req.params._id
     Page.deleteOne({ _id })
-        .then((r) => {
-            res.send({ success: true, msg: r });
-        }).catch((err) => {
-            return console.error(err)
+        .then(r => {
+            res.send({ success: true, msg: r })
         })
-    res.send({ success: true, msg: 'delete ok' });
-});
-
+        .catch(e => {
+            res.send({ success: false, msg: e.message })
+        })
+})
 
 router.all('*', function (req, res, next) {
-    next(createError(404, '그런 test 없어요'));
+    next(createError(404, '그런 api 없어'));
 });
 
 module.exports = router;

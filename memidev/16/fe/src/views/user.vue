@@ -147,7 +147,6 @@ export default {
         .get(`${this.$apiRootPath}manage/user`)
         .then(r => {
           this.users = r.data.users;
-          console.log(r.data.users);
         })
         .catch(e => {
           this.pop(e.message);
@@ -169,7 +168,6 @@ export default {
           age: this.userAge
         })
         .then(r => {
-          console.log(r);
           this.pop("사용자 수정 완료");
           this.getUsers();
         })
@@ -181,8 +179,6 @@ export default {
       this.$axios
         .delete(`${this.$apiRootPath}manage/user/${id}`)
         .then(r => {
-          console.log(r);
-
           this.pop("사용자 삭제 완료");
           this.getUsers();
         })

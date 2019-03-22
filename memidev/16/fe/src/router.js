@@ -9,6 +9,7 @@ Vue.prototype.$apiRootPath = apiRootPath
 
 const pageCheck = (to, from, next) => {
     // return next()
+    console.log(to.path.replace('/', ''))
     axios.post(`${apiRootPath}page`, { name: to.path.replace('/', '') }, { headers: { Authorization: localStorage.getItem('token') } })
         .then((r) => {
             if (!r.data.success) throw new Error(r.data.msg)

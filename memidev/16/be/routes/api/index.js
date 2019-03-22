@@ -13,6 +13,7 @@ const verifyToken = (t) => {
         if (t.length < 10) resolve({ id: 'guest', name: '손님', lv: 3 })
         jwt.verify(t, cfg.secretKey, (err, v) => {
             if (err) reject(err)
+
             resolve(v)
         })
     })
@@ -23,6 +24,7 @@ router.all('*', function (req, res, next) {
     verifyToken(token)
         .then(v => {
             req.user = v
+            console.log('req.user=', v)
             next()
         })
         .catch(e => res.send({ success: false, msg: e.message }))

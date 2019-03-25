@@ -20,7 +20,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         userInfo: {
-            id: null, name: null
+            id: null, name: null, lev: null
         },
         isLogin: false,
         loginError: false,
@@ -30,6 +30,7 @@ export default new Vuex.Store({
         loginSuccess(state, payload) {
             state.userInfo.id = payload.u_id;
             state.userInfo.name = payload.u_name;
+            state.userInfo.level = payload.level;
             state.isLogin = true;
             state.loginError = false;
             state.errorText = payload.msg;
@@ -44,8 +45,10 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        signUp({ commit, state }, payload) {
+        login({ commit, state }, payload) {
+
             axios.post('/api/login', payload).then((res) => {
+                console.log(res.data.success)
                 if (res.data.success) {
                     return commit('loginSuccess', res.data)
                 } else {
@@ -61,6 +64,7 @@ export default new Vuex.Store({
             state.userInfo.name = null;
             state.isLogin = false;
             state.loginError = false;
+            localStorage.removeItem('token')
             router.push({ name: 'login' })
         }
     }

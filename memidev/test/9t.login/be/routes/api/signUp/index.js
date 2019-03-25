@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('../../../modles/user')
+var pool = require('../../../modles/db')
 const crypto = require('crypto');
 
 

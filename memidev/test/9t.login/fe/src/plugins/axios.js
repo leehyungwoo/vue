@@ -6,12 +6,12 @@ import axios from "axios";
 var auth;
 // Full config:  https://github.com/axios/axios#request-config
 axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || 'http://localhost:3000';
+
 if (localStorage.getItem('token') === null) {
-    auth = "null"
+    auth = "null";
 } else {
     auth = localStorage.getItem('token')
 }
-
 axios.defaults.headers.common['authorization'] = auth;
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';

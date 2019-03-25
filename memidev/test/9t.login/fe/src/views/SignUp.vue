@@ -119,7 +119,9 @@ export default {
       items: ["naver.com", "b"]
     };
   },
-  mounted() {},
+  mounted() {
+    localStorage.removeItem("token");
+  },
   methods: {
     idChecker() {
       this.$axios

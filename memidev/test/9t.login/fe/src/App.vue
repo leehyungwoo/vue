@@ -5,7 +5,20 @@
       fixed
       app
     >
+
       <v-list dense>
+
+        <v-list-tile
+          v-if="!$store.state.isLogin"
+          @click="$router.push({name:'login'})"
+        >
+          <v-list-tile-action>
+            <v-icon>contact_mail</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>login</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
 
         <v-list-tile
           v-for="(item,idx) in items"
@@ -42,6 +55,7 @@
               v-on="on"
             >
               {{$store.state.userInfo.id}}
+              lv:{{$store.state.userInfo.level}}
             </v-btn>
           </template>
           <v-list>
@@ -79,11 +93,6 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      {
-        title: "login",
-        icon: "contact_mail",
-        routerName: "login"
-      },
       {
         title: "Home",
         icon: "home",

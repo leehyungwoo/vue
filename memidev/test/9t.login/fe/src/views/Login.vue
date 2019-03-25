@@ -52,7 +52,7 @@
             <v-btn
               block
               color="primary"
-              @click="$store.dispatch('signUp',userLogin)"
+              @click="$store.dispatch('login',userLogin)"
             >Login</v-btn>
             <v-btn
               block
@@ -83,7 +83,7 @@ export default {
     ...mapState(["isLogin", "loginError", "errorText"])
   },
   methods: {
-    ...mapActions(["signUp"])
+    ...mapActions(["login"])
   }
 };
 </script>

@@ -114,3 +114,4 @@ console.log(token) // bar
 var decoded = jwt.verify(token, key);
 console.log(decoded) // bar
 // console.log(new Date(decoded.iat * 1000))
+

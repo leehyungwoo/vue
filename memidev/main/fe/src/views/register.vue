@@ -38,38 +38,41 @@
           <v-card-text>
             <form>
               <v-text-field
-                v-model="name"
-                v-validate="'required|max:10'"
-                :counter="10"
-                :error-messages="errors.collect('name')"
-                label="Name"
-                data-vv-name="name"
+                v-model="form.id"
+                v-validate="'required|min:4|max:20'"
+                :counter="20"
+                :error-messages="errors.collect('id')"
+                label="아이디"
+                data-vv-name="id"
                 required
               ></v-text-field>
               <v-text-field
-                v-model="email"
-                v-validate="'required|email'"
-                :error-messages="errors.collect('email')"
-                label="E-mail"
-                data-vv-name="email"
+                type="password"
+                v-model="form.pwd"
+                v-validate="'required|min:6|max:10'"
+                :counter="10"
+                :error-messages="errors.collect('pwd')"
+                label="비밀번호"
+                data-vv-name="pwd"
                 required
               ></v-text-field>
-              <v-select
-                v-model="select"
-                v-validate="'required'"
-                :items="items"
-                :error-messages="errors.collect('select')"
-                label="Select"
-                data-vv-name="select"
+              <v-text-field
+                v-model="form.name"
+                v-validate="'required|min:1|max:40'"
+                :counter="40"
+                :error-messages="errors.collect('name')"
+                label="이름"
+                data-vv-name="name"
                 required
-              ></v-select>
+              ></v-text-field>
+
               <v-checkbox
-                v-model="checkbox"
+                v-model="agree"
                 v-validate="'required'"
-                :error-messages="errors.collect('checkbox')"
+                :error-messages="errors.collect('agree')"
                 value="1"
-                label="Option"
-                data-vv-name="checkbox"
+                label="이용약관: 암호는 저장됩니다"
+                data-vv-name="agree"
                 type="checkbox"
                 required
               ></v-checkbox>
@@ -77,17 +80,27 @@
               <v-btn
                 color="primary"
                 @click="submit"
-              >submit</v-btn>
+              >가입</v-btn>
               <v-btn
                 color="secondary"
                 @click="clear"
-              >clear</v-btn>
+              >취소</v-btn>
             </form>
           </v-card-text>
 
         </v-card>
       </v-flex>
     </v-layout>
+    <v-snackbar v-model="sb.act">
+      {{sb.msg}}
+      <v-btn
+        :color="sb.color"
+        flat
+        @click="sb.act = false"
+      >
+        닫기
+      </v-btn>
+    </v-snackbar>
   </v-container>
 
 </template>
@@ -101,15 +114,26 @@ export default {
   },
 
   data: () => ({
-    name: "",
-    email: "",
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: null,
+    form: {
+      id: "",
+      pwd: "",
+      name: "",
+      email: ""
+    },
+    agree: null,
+    sb: {
+      act: false,
+      messages: "",
+      color: "warning"
+    },
+
     dictionary: {
       messages: ko.messages,
       attributes: {
-        email: "E-mail Address"
+        id: "아이디",
+        pwd: "비밀번호",
+        name: "이름",
+        agree: "이용약관"
         // custom attributes
       },
       custom: {
@@ -126,20 +150,37 @@ export default {
   }),
 
   mounted() {
-    console.log(ko.messages);
     this.$validator.localize("ko", this.dictionary);
   },
 
   methods: {
     submit() {
-      this.$validator.validateAll();
+      this.$validator
+        .validateAll()
+        .then(r => {
+          if (!r) throw new Error("필수항목을 다 채워주세요");
+          return this.$axios.post("register", this.form);
+        })
+        .then(r => {
+          if (!r.data.success) return this.pop("서버에러", "warning");
+          this.pop("가입 완료 되었습니다", "success");
+          this.$router.push("/sign");
+        })
+        .catch(e => {
+          this.pop(e.message, "error");
+        });
     },
     clear() {
-      this.name = "";
-      this.email = "";
-      this.select = null;
-      this.checkbox = null;
+      this.form.id = "";
+      this.form.pwd = "";
+      this.form.name = "";
+      this.form.agree = null;
       this.$validator.reset();
+    },
+    pop(msg, cl) {
+      this.sb.act = true;
+      this.sb.msg = msg;
+      this.sb.color = cl;
     }
   }
 };

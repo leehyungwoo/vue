@@ -116,6 +116,13 @@ export default {
         },
         {
           icon: "face",
+          title: "사용자들관리",
+          to: {
+            path: "/users"
+          }
+        },
+        {
+          icon: "face",
           title: "페이지관리",
           to: {
             path: "/page"

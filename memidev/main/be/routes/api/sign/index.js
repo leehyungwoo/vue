@@ -1,6 +1,7 @@
 var express = require('express');
 var createError = require('http-errors');
 var router = express.Router();
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
 const cfg = require('../../../../config')
 const User = require('../../../models/user')
@@ -21,8 +22,11 @@ router.post('/in', (req, res) => {
 
     User.findOne({ id })
         .then((r) => {
+            console.log('r.pwd', r.pwd)
+
             if (!r) throw new Error('존재하지 않는 아이디입니다.')
-            if (r.pwd !== pwd) throw new Error('비밀번호가 틀립니다.')
+            const p = crypto.scryptSync(pwd, r._id.toString(), 64, { N: 1024 }).toString('hex');
+            if (r.pwd !== p) throw new Error('비밀번호가 틀립니다.')
             return signToken(r.id, r.lv, r.name)
         })
         .then((r) => {

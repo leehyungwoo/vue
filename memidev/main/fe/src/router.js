@@ -82,6 +82,12 @@ export default new Router({
             beforeEnter: pageCheck
         },
         {
+            path: '/users',
+            name: '사용자들',
+            component: () => import('./views/users'),
+            // beforeEnter: pageCheck
+        },
+        {
             path: '/page',
             name: '페이지',
             component: () => import('./views/page'),

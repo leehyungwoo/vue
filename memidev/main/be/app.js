@@ -107,11 +107,18 @@ mongoose.connect(cfg.dbUrl, { useNewUrlParser: true }, function (err, db) {
 
 module.exports = app;
 
-var jwt = require('jsonwebtoken');
-const key = "암호화방식의나만의어려운어려운키"
-var token = jwt.sign({ id: 'shine', email: 'leewoo@xxx.com' }, key);
-console.log(token) // bar
-var decoded = jwt.verify(token, key);
-console.log(decoded) // bar
+// var jwt = require('jsonwebtoken');
+// const key = "암호화방식의나만의어려운어려운키"
+// var token = jwt.sign({ id: 'shine', email: 'leewoo@xxx.com' }, key);
+// console.log(token) // bar
+// var decoded = jwt.verify(token, key);
+// console.log(decoded) // bar
 // console.log(new Date(decoded.iat * 1000))
 
+// const crypto = require('crypto');
+// // Using the factory defaults.
+// const key1 = crypto.scryptSync('1234', 'salt', 64);
+// console.log('헥스', key1.toString('hex'));  // '3745e48...08d59ae'
+// // Using a custom N parameter. Must be a power of two.
+// const key2 = crypto.scryptSync('1233', 'salt', 64, { N: 1024 });
+// console.log('헥스2', key2.toString('hex'));  // '3745e48...aa39b34'

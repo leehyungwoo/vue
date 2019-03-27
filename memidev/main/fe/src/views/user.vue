@@ -25,6 +25,8 @@
               <div>권한: {{user.lv}}</div>
               <div>나이: {{user.age}}</div>
               <div>로그인 횟수: {{user.inCnt}}</div>
+              <div>암호: {{user.pwd}}</div>
+              <div>솔트: {{user.salt}}</div>
             </div>
           </v-card-title>
           <v-divider light></v-divider>
@@ -146,6 +148,7 @@ export default {
       this.$axios
         .get(`${this.$apiRootPath}manage/user`)
         .then(r => {
+          console.log(r.data);
           this.users = r.data.users;
         })
         .catch(e => {
@@ -168,7 +171,7 @@ export default {
           age: this.userAge
         })
         .then(r => {
-          this.pop("사용자 수정 완료");
+          this.pop("사용자 수정 완료", r);
           this.getUsers();
         })
         .catch(e => {
@@ -179,7 +182,7 @@ export default {
       this.$axios
         .delete(`${this.$apiRootPath}manage/user/${id}`)
         .then(r => {
-          this.pop("사용자 삭제 완료");
+          this.pop("사용자 삭제 완료", r);
           this.getUsers();
         })
         .catch(e => {

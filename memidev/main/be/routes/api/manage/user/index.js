@@ -1,6 +1,7 @@
 var express = require('express');
 var createError = require('http-errors');
 var router = express.Router();
+const crypto = require('crypto');
 const User = require('../../../../models/user')
 
 router.get('/', function (req, res, next) {

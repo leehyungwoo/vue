@@ -162,7 +162,7 @@ export default {
           return this.$axios.post("register", this.form);
         })
         .then(r => {
-          if (!r.data.success) return this.pop("서버에러", "warning");
+          if (!r.data.success) return this.pop(r.data.msg, "warning");
           this.pop("가입 완료 되었습니다", "success");
           this.$router.push("/sign");
         })

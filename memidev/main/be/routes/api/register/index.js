@@ -1,6 +1,7 @@
 var express = require('express');
 var createError = require('http-errors');
 var router = express.Router();
+const crypto = require('crypto');
 const User = require('../../../models/user')
 
 
@@ -16,7 +17,13 @@ router.post('/', (req, res) => {
             return User.create(u)
         })
         .then((r) => {
-            res.send({ success: true, token: r })
+            const salt = r._id.toString();
+            const pwd = crypto.scryptSync(r.pwd, salt, 64, { N: 1024 }).toString('hex');
+            return User.updateOne({ _id: r._id }, { $set: { pwd, salt } })
+        })
+        .then((r) => {
+            console.log('결과', r)
+            res.send({ success: true, msg: '가입되었습니다' })
         })
         .catch((e) => {
             console.log(e)

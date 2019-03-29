@@ -20,13 +20,17 @@ const User = mongoose.model('User', userSchema)
 User.findOne({ id: cfg.admin.id })
     .then((r) => {
         // console.log(r)
-        if (!r) return User.create({ id: cfg.admin.id, pwd: cfg.admin.pwd, name: cfg.admin.name, lv: 0 })
+        if (!r) return User.create({ id: cfg.admin.id, pwd: cfg.admin.pwd, name: cfg.admin.name, lv: 0, remember: false })
         // if (r.lv === undefined) return User.updateOne({ _id: r._id }, { $set: { lv: 0, inCnt: 0 } }) // 임시.. 관리자 계정 레벨 0으로..
         return Promise.resolve(null)
     })
     .then((r) => {
-        if (!r) Promise.resolve(null)
-        if (r.pwd !== cfg.admin.pwd) Promise.resolve(null)
+        if (!r) {
+            return Promise.resolve(null)
+        }
+        if (r.pwd !== cfg.admin.pwd) {
+            return Promise.resolve(null)
+        }
         if (r) console.log(`admin:${r.id} created!`)
         const pwd = crypto.scryptSync(r.pwd, r._id.toString(), 64, { N: 1024 }).toString('hex');
         return User.updateOne({ _id: r._id }, { $set: { pwd } })

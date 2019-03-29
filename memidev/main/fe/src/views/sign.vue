@@ -53,6 +53,11 @@
                 type="password"
                 v-model="form.pwd"
               ></v-text-field>
+              <v-checkbox
+                label="암호 기억하기(최대 7일간 보관됩니다)"
+                v-model="form.remember"
+              >
+              </v-checkbox>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -73,14 +78,15 @@
 export default {
   data() {
     return {
-      form: { id: "", pwd: "" }
+      form: { id: "", pwd: "", remember: false }
     };
   },
   methods: {
     signIn() {
-      axios
+      this.$axios
         .post(`${this.$apiRootPath}sign/in`, this.form)
         .then(r => {
+          console.log(r);
           if (!r.data.success) return console.error(r.data.msg);
           localStorage.setItem("token", r.data.token);
           this.$store.commit("getToken");

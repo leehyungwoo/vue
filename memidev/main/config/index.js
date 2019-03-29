@@ -7,5 +7,13 @@ module.exports = {
         pwd: '1234',
         name: '관리자'
     },
-    secretKey: '엄청어려운시크릿키@#!'
+    jwt: {
+        secretKey: '아주 어려운 토큰 발급용 키',
+        issuer: 'xxx.com',
+        algorithm: 'HS256',
+        expiresIn: 60 * 3, // 기본 3분
+        expiresInRemember: 60 * 60 * 24 * 7, // 기억하기 눌렀을 때 7일
+        expiresInDiv: 3, // 토큰시간 나누는 기준,
+        subject: '유저정보'
+    }
 };

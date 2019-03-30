@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import Bus from "@/bus";
 export default {
   name: "headerCom",
 
@@ -42,19 +43,14 @@ export default {
         id: "",
         name: ""
       },
-      uobj: this.updateobj
+      uobj: Bus.updateobj
     };
-  },
-  props: {
-    updateobj: {
-      type: Object
-    }
   },
 
   methods: {
     pusharray() {
       if (!this.vail()) return false;
-      this.$emit("pusharray", this.m_obj);
+      Bus.pusharray(this.m_obj);
       this.mobjreset();
     },
     mobjreset() {
@@ -65,15 +61,15 @@ export default {
         alert("아이디을 입력해 주세요.");
         return false;
       } else if (!this.m_obj.name || !this.m_obj.name.trim()) {
-        alert("아이디을 입력해 주세요.");
+        alert("이름을 입력해 주세요.");
         return false;
       }
       return true;
     },
     updatearray() {
       if (this.obj) {
-        this.obj.id = this.updateobj.id;
-        this.obj.name = this.updateobj.name;
+        this.obj.id = Bus.updateobj.id;
+        this.obj.name = Bus.updateobj.name;
       }
     }
   }

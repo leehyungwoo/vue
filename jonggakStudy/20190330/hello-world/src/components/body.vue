@@ -43,25 +43,26 @@
 </template>
 
 <script>
+import Bus from "@/bus";
+
 export default {
   name: "bodyCom",
   data() {
     return {
-      ctodos: this.todos
+      ctodos: Bus.todos
     };
   },
-  props: ["todos"],
   methods: {
     detail(obj) {
       if (event.target.nodeName == "BUTTON") return false;
-      this.$emit("updateobj", obj);
+      Bus.updateobj(obj);
     },
     detailpoparray(idx) {
-      this.todos.splice(idx, 1);
+      Bus.todos.splice(idx, 1);
     },
 
     withdraw(obj) {
-      this.$emit("withdraw", obj);
+      Bus.withdraw(obj);
     }
   }
 };

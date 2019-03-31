@@ -29,6 +29,7 @@
         v-on:click="updatearray"
       >수정</button>
     </div>
+
   </div>
 </template>
 
@@ -43,10 +44,16 @@ export default {
         id: "",
         name: ""
       },
-      uobj: Bus.updateobj
+      uobj: null
     };
   },
-
+  mounted() {
+    Bus.$on("test", obj => {
+      this.m_obj.id = obj.id;
+      this.m_obj.name = obj.name;
+      this.uobj = true;
+    });
+  },
   methods: {
     pusharray() {
       if (!this.vail()) return false;

@@ -39,6 +39,7 @@
         </tr>
       </tbody>
     </table>
+
   </div>
 </template>
 
@@ -55,7 +56,8 @@ export default {
   methods: {
     detail(obj) {
       if (event.target.nodeName == "BUTTON") return false;
-      Bus.updateobj(obj);
+      Bus.updatearray(obj);
+      Bus.$emit("test", obj);
     },
     detailpoparray(idx) {
       Bus.todos.splice(idx, 1);

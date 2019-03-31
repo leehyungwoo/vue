@@ -8,6 +8,7 @@ export default new Vue({
             updateobj: null
         };
     },
+
     methods: {
         pusharray: function (m_obj) {
             this.todos.push({
@@ -27,7 +28,7 @@ export default new Vue({
                 this.updateobj.name = obj.name;
             }
 
-            console.log("실행, inputcomponent자식에게 발생시켜야함.");
+
         },
         withdraw(obj) {
             obj.state = "0";

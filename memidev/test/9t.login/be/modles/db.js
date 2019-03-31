@@ -8,7 +8,7 @@ var pool = mysql.createPool({
     password: cfg.mysql.password,
     database: cfg.mysql.database
 });
-altas
+
 
 var connection = mysql.createConnection({
     host: cfg.mysql.host,

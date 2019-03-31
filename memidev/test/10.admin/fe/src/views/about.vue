@@ -1,0 +1,9 @@
+<template>
+  <v-content>
+    <v-container>
+      <v-layout>
+        About
+      </v-layout>
+    </v-container>
+  </v-content>
+</template>

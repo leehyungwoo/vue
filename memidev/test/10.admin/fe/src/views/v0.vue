@@ -1,0 +1,9 @@
+<template>
+  <v-content>
+    <v-container>
+      <v-layout>
+        v0
+      </v-layout>
+    </v-container>
+  </v-content>
+</template>

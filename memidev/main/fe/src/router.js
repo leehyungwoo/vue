@@ -110,6 +110,12 @@ export default new Router({
             component: () => import('./views/register'),
         },
         {
+            path: '/manage/boards',
+            name: 'manageBoards',
+            component: () => import('./views/manage/boards'),
+            beforeEnter: pageCheck
+        },
+        {
             path: '/block/:msg',
             name: '차단',
             component: () => import('./views/block')

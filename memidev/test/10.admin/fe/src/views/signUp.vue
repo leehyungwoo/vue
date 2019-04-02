@@ -44,6 +44,7 @@
                     @input="$v.password.$touch()"
                     @blur="$v.password.$touch()"
                   ></v-text-field>
+
                   <v-text-field
                     type="password"
                     v-model="passwordchk"
@@ -53,6 +54,7 @@
                     @input="$v.passwordchk.$touch()"
                     @blur="$v.passwordchk.$touch()"
                   ></v-text-field>
+
                   <v-text-field
                     v-model.trim="name"
                     :error-messages="nameErrors"
@@ -62,6 +64,7 @@
                     @input="$v.name.$touch()"
                     @blur="$v.name.$touch()"
                   ></v-text-field>
+
                   <v-text-field
                     v-model.trim="email"
                     :error-messages="emailErrors"
@@ -70,6 +73,7 @@
                     @input="$v.email.$touch()"
                     @blur="$v.email.$touch()"
                   ></v-text-field>
+
                   <v-select
                     v-model="select"
                     :items="items"
@@ -181,6 +185,10 @@ export default {
       if (this.password.length < 8) errors.push("8글자 이상으로 작성해주세요");
       !this.$v.password.maxLength && errors.push("20이내로 작성해주세요");
       !this.$v.password.required && errors.push("비밀번호를 써주세요.");
+      //   if (this.password !== this.passwordchk) {
+      //     errors.push("비밀번호를 확인해주세요.");
+      //   }
+
       return errors;
     },
     passwordchkErrors() {
@@ -189,6 +197,9 @@ export default {
       if (this.password.length < 8) errors.push("8글자 이상으로 작성해주세요");
       !this.$v.passwordchk.maxLength && errors.push("20이내로 작성해주세요");
       !this.$v.passwordchk.required && errors.push("비밀번호체크를 써주세요.");
+      if (this.password !== this.passwordchk) {
+        errors.push("비밀번호를 확인해주세요.");
+      }
       return errors;
     }
   },

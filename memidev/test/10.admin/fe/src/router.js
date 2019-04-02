@@ -27,13 +27,19 @@ export default new Router({
             path: '/signUpEnt',
             name: 'signUpEnt',
             component: () => import(/* webpackChunkName: "signUpEnt" */ './views/signUpEnt.vue'),
-            children: []
+
         },
         {
             path: '/signUp',
             name: 'signUp',
             component: () => import(/* webpackChunkName: "signUp" */ './views/signUp.vue'),
-            children: []
+            beforeEnter: function (to, from, next) {
+                if (to.params.check) {
+                    next()
+                } else {
+                    next('/signUpEnt')
+                }
+            }
         },
         {
             path: '/v0',

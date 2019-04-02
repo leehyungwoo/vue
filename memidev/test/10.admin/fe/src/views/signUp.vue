@@ -75,13 +75,13 @@
                   ></v-text-field>
 
                   <v-select
-                    v-model="select"
+                    v-model="gender"
                     :items="items"
-                    :error-messages="selectErrors"
+                    :error-messages="genderErrors"
                     label="성별"
                     required
-                    @change="$v.select.$touch()"
-                    @blur="$v.select.$touch()"
+                    @change="$v.gender.$touch()"
+                    @blur="$v.gender.$touch()"
                   ></v-select>
                 </v-form>
               </v-card-text>
@@ -123,7 +123,7 @@ export default {
     id: { required, minLength: minLength(15), maxLength: maxLength(15) },
     name: { required, maxLength: maxLength(15) },
     email: { required, email },
-    select: { required },
+    gender: { required },
     password: { required, maxLength: maxLength(20) },
     passwordchk: { required, maxLength: maxLength(20) },
     checkbox: {
@@ -139,7 +139,7 @@ export default {
     email: "",
     password: "",
     passwordchk: "",
-    select: null,
+    gender: null,
     items: ["남자", "여자"],
     checkbox: false
   }),
@@ -159,10 +159,10 @@ export default {
       !this.$v.id.required && errors.push("아이디를 작성해주세요.");
       return errors;
     },
-    selectErrors() {
+    genderErrors() {
       const errors = [];
-      if (!this.$v.select.$dirty) return errors;
-      !this.$v.select.required && errors.push("성별을 선택해주세요");
+      if (!this.$v.gender.$dirty) return errors;
+      !this.$v.gender.required && errors.push("성별을 선택해주세요");
       return errors;
     },
     nameErrors() {
@@ -207,12 +207,26 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
+      this.$axios
+        .post("http://localhost:3000/api/signUp/", {
+          id: this.id,
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          gender: this.gender
+        })
+        .then(r => {
+          console.log(r);
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
     clear() {
       this.$v.$reset();
       this.name = "";
       this.email = "";
-      this.select = null;
+      this.gender = null;
       this.checkbox = false;
     }
   }

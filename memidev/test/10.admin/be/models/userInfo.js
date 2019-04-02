@@ -21,20 +21,18 @@ function poolConnection(query, sql) {
     return new Promise((resolve, reject) => {
         pool.getConnection(function (err, connection) {
             if (err) {
-                reject(err)
-                throw err;
+                reject('커넥션에러')
             }
             connection.query(query, sql, function (error, results, fields) {
+                connection.release();
                 if (error) {
-                    reject('userInfo db 쿼리 에러')
-                    throw error;
+                    return reject(error)
                 };
                 if (results) {
-                    resolve(results)
+                    return resolve(results)
                 } else {
-                    reject('userInfo db 쿼리 받는요청 없음')
+                    return reject('검색실패')
                 }
-                connection.release();
             });
 
         });

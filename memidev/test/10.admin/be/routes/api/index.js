@@ -5,7 +5,7 @@ router.use('/signUp', require('./signUp'));
 
 // /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.send('api뎁스');
+    res.send('get. api root')
 });
 
 module.exports = router;

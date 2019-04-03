@@ -13,9 +13,11 @@ router.get('/', function (req, res) {
 /* GET users listing. */
 router.post('/', function (req, res) {
     const { id, name, gender, email, password } = req.body;
+
     crypto.randomBytes(64, (err, buf) => {
         const salt = buf.toString('base64');
         const cryptoPwd = crypto.scryptSync(password, salt, 64).toString('hex');
+        //프론트단에서 id유무 체크먼저, 체크먼저하지않으면 pk의 count가 올라간다.
         userInfo(`INSERT INTO userinfo (id,name,gender,email,password,salt,regDate) VALUES (?,?,?,?,?,?,now())`, [id, name, gender, email, cryptoPwd, salt])
             .then(r => {
                 res.json({ success: true, msg: '가입 완료' })

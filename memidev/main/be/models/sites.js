@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const cfg = require('../../config')
+
 
 const siteSchema = new mongoose.Schema({
     title: { type: String, default: '등록 필요' },

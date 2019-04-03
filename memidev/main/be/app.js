@@ -42,7 +42,7 @@ app.use(function (err, req, res, next) {
 
 
 const mongoose = require('mongoose');
-const User = require('./models/user.js')
+// const User = require('./models/user.js')
 console.log(`${process.env.NODE_ENV} started!`)
 
 const cfg = require('../config')
@@ -122,3 +122,38 @@ module.exports = app;
 // // Using a custom N parameter. Must be a power of two.
 // const key2 = crypto.scryptSync('1233', 'salt', 64, { N: 1024 });
 // console.log('헥스2', key2.toString('hex'));  // '3745e48...aa39b34'
+
+const User = require('./models/user')
+const Board = require('./models/boards')
+const Article = require('./models/articles')
+
+
+/* id값으로 핸들링하는거 체험. */
+// User.findOne()
+//     .then(r => { console.log('user', r.id, r._id) }) //5c9d6acfa1a6960bf8e4b1c9
+
+// Board.findOne()
+//     .then(r => { console.log('board', r.name, r._id) }) //5ca2eef092d8e7334c04d7f0
+
+// Article.create({ title: 'aaa', content: 'kkfjf', _user: '5c9d6acfa1a6960bf8e4b1c9', _board: '5ca2eef092d8e7334c04d7f0' })
+// .then(r => console.log(r))
+
+// Article.find({ _board: '5ca2eef092d8e7334c04d7f0' })
+//     .populate('_user', 'name')
+//     .populate('_board')
+//     .then(r => console.log(r))
+// Article.deleteMany({}).then(r => { console.log(r) })
+
+
+// Article.findOne({ _board: '5ca2eef092d8e7334c04d7f0' })
+//     .populate('_user', 'name')
+//     .populate('_board')
+//     .then(r =>
+//         console.log(r)
+//     )
+
+// Article.findOne().then(r => {
+//     console.log('보기',r)
+// })
+
+

@@ -120,13 +120,18 @@ export default {
   mixins: [validationMixin],
 
   validations: {
-    id: { required, minLength: minLength(15), maxLength: maxLength(15) },
+    id: { required, minLength: minLength(3), maxLength: maxLength(15) },
     name: { required, maxLength: maxLength(15) },
     email: { required, email },
     gender: { required },
-    password: { required, maxLength: maxLength(20) },
-    passwordchk: { required, maxLength: maxLength(20) },
+    password: { required, minLength: minLength(4), maxLength: maxLength(20) },
+    passwordchk: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(20)
+    },
     checkbox: {
+      required,
       checked(val) {
         return val;
       }
@@ -140,8 +145,8 @@ export default {
     password: "",
     passwordchk: "",
     gender: null,
-    items: ["남자", "여자"],
-    checkbox: false
+    checkbox: false,
+    items: ["남자", "여자"]
   }),
 
   computed: {
@@ -154,7 +159,7 @@ export default {
     idErrors() {
       const errors = [];
       if (!this.$v.id.$dirty) return errors;
-      if (this.id.length < 3) errors.push("3글자 이상으로 작성해주세요");
+      !this.$v.id.minLength && errors.push("3글자 이상으로 작성해주세요");
       !this.$v.id.maxLength && errors.push("20글자 이내로 작성해주세요");
       !this.$v.id.required && errors.push("아이디를 작성해주세요.");
       return errors;
@@ -182,19 +187,16 @@ export default {
     passwordErrors() {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
-      if (this.password.length < 8) errors.push("8글자 이상으로 작성해주세요");
+      !this.$v.password.minLength && errors.push("4글자 이상으로 작성해주세요");
       !this.$v.password.maxLength && errors.push("20이내로 작성해주세요");
       !this.$v.password.required && errors.push("비밀번호를 써주세요.");
-      //   if (this.password !== this.passwordchk) {
-      //     errors.push("비밀번호를 확인해주세요.");
-      //   }
-
       return errors;
     },
     passwordchkErrors() {
       const errors = [];
       if (!this.$v.passwordchk.$dirty) return errors;
-      if (this.password.length < 8) errors.push("8글자 이상으로 작성해주세요");
+      !this.$v.passwordchk.minLength &&
+        errors.push("4글자 이상으로 작성해주세요");
       !this.$v.passwordchk.maxLength && errors.push("20이내로 작성해주세요");
       !this.$v.passwordchk.required && errors.push("비밀번호체크를 써주세요.");
       if (this.password !== this.passwordchk) {
@@ -206,21 +208,39 @@ export default {
 
   methods: {
     submit() {
+      //signUp index의 20번째줄.프론트단에서 id유무 체크먼저, 체크먼저하지않으면 pk의 count가 올라간다.
       this.$v.$touch();
-      this.$axios
-        .post("http://localhost:3000/api/signUp/", {
-          id: this.id,
-          name: this.name,
-          email: this.email,
-          password: this.password,
-          gender: this.gender
-        })
-        .then(r => {
-          console.log(r);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      if (
+        this.idErrors.length === 0 &&
+        this.passwordErrors.length === 0 &&
+        this.passwordchkErrors.length === 0 &&
+        this.nameErrors.length === 0 &&
+        this.emailErrors.length === 0 &&
+        this.genderErrors.length === 0 &&
+        this.checkboxErrors.length === 0
+      ) {
+        this.$axios
+          .post("http://localhost:3000/api/signUp/", {
+            id: this.id,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            gender: this.gender
+          })
+          .then(r => {
+            if (r.data.success) {
+              alert(r.data.msg);
+              this.$router.push({ name: "login" });
+            } else {
+              alert(r.data.msg);
+            }
+          })
+          .catch(e => {
+            alert(e);
+          });
+      } else {
+        alert("남은 항목을 작성해주세요");
+      }
     },
     clear() {
       this.$v.$reset();

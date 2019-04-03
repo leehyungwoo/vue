@@ -16,8 +16,8 @@ router.post('/', (req, res, next) => {
 
 router.get('/', function (req, res, next) {
     Board.find()
-        .then(rs => {
-            res.send({ success: true, ds: rs, token: req.token })
+        .then(r => {
+            res.send({ success: true, d: r, token: req.token })
         })
         .catch(e => {
             res.send({ success: false })

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const cfg = require('../../config')
+
 
 mongoose.set('useCreateIndex', true)
 const boardSchema = new mongoose.Schema({

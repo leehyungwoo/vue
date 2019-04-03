@@ -46,68 +46,57 @@ const pageCheck = (to, from, next) => {
             next(`/block/${e.message}`)
         })
 }
-
 export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
-            name: 'lv0',
-            component: () => import('./views/lv0'),
+            name: 'boardAnyone',
+            component: () => import('./views/board/anyone'),
+
+        },
+        {
+            path: '/test/lv3',
+            name: 'testLv3',
+            component: () => import('./views/test/lv3'),
             beforeEnter: pageCheck
         },
         {
-            path: '/lv1',
-            name: 'lv1',
-            component: () => import('./views/lv1'),
+            path: '/test/lv2',
+            name: 'testLv2',
+            component: () => import('./views/test/lv2'),
             beforeEnter: pageCheck
         },
         {
-            path: '/lv2',
-            name: 'lv2',
-            component: () => import('./views/lv2'),
+            path: '/test/lv1',
+            name: 'testLv1',
+            component: () => import('./views/test/lv1'),
             beforeEnter: pageCheck
         },
         {
-            path: '/lv3',
-            name: 'lv3',
-            component: () => import('./views/lv3'),
+            path: '/test/lv0',
+            name: 'testLv0',
+            component: () => import('./views/test/lv0'),
             beforeEnter: pageCheck
         },
         {
-            path: '/user',
-            name: '사용자',
-            component: () => import('./views/user'),
+            path: '/manage/users',
+            name: 'manageUsers',
+            component: () => import('./views/manage/user'),
             beforeEnter: pageCheck
         },
         {
-            path: '/users',
-            name: '사용자들',
-            component: () => import('./views/users'),
-            // beforeEnter: pageCheck
-        },
-        {
-            path: '/page',
-            name: '페이지',
-            component: () => import('./views/page'),
+            path: '/manage/pages',
+            name: 'managePages',
+            component: () => import('./views/manage/pages'),
             beforeEnter: pageCheck
         },
         {
-            path: '/site',
-            name: '사이트',
-            component: () => import('./views/site'),
+            path: '/manage/sites',
+            name: 'manageSites',
+            component: () => import('./views/manage/sites'),
             beforeEnter: pageCheck
-        },
-        {
-            path: '/sign',
-            name: 'sign',
-            component: () => import('./views/sign'),
-        },
-        {
-            path: '/register',
-            name: 'register',
-            component: () => import('./views/register'),
         },
         {
             path: '/manage/boards',
@@ -120,6 +109,25 @@ export default new Router({
             name: '차단',
             component: () => import('./views/block')
         },
-
+        // {
+        //   path: '/test',
+        //   name: 'test',
+        //   component: () => import('./views/test')
+        // },
+        {
+            path: '/sign',
+            name: '로그인',
+            component: () => import('./views/sign')
+        },
+        {
+            path: '/register',
+            name: '회원가입',
+            component: () => import('./views/register')
+        },
+        {
+            path: '*',
+            name: 'e404',
+            component: () => import('./views/e404')
+        }
     ]
 })

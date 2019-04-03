@@ -4,11 +4,12 @@ import axios from 'axios'
 
 Vue.use(Router)
 
+
 const apiRootPath = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/api/' : '/api/'
 Vue.prototype.$apiRootPath = apiRootPath
 axios.defaults.baseURL = apiRootPath
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
@@ -18,34 +19,32 @@ axios.interceptors.request.use(function (config) {
     // Do something with request error
     return Promise.reject(error)
 })
+
 // Add a response interceptor
 axios.interceptors.response.use(function (response) {
     // Do something with response data
-    if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        this.$store.commit("getToken");
-    }
+    const token = response.data.token
+    // console.log(token)
+    if (token) localStorage.setItem('token', token)
     return response
 }, function (error) {
     // Do something with response error
     return Promise.reject(error)
 })
 
-
-
 const pageCheck = (to, from, next) => {
     // return next()
-    axios.post(`${apiRootPath}page`, { name: to.path.replace('/', '') }, { headers: { Authorization: localStorage.getItem('token') } })
+    axios.post('page', { name: to.path })
         .then((r) => {
-            console.log(r)
             if (!r.data.success) throw new Error(r.data.msg)
             next()
         })
         .catch((e) => {
             // console.error(e.message)
-            next(`/block/${e.message}`)
+            next(`/block/${e.message.replace(/\//gi, ' ')}`)
         })
 }
+
 export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -54,7 +53,7 @@ export default new Router({
             path: '/',
             name: 'boardAnyone',
             component: () => import('./views/board/anyone'),
-
+            beforeEnter: pageCheck
         },
         {
             path: '/test/lv3',

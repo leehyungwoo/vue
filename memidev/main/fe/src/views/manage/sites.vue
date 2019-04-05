@@ -6,17 +6,8 @@
     >
       데이터가 없습니다
     </v-alert>
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs12
-        sm6
-        md4
-        v-for="site in sites"
-        :key="site._id"
-      >
+    <v-layout row wrap>
+      <v-flex xs12 sm6 md4 v-for="site in sites" :key="site._id">
         <v-card>
           <v-card-title primary-title>
             <div>
@@ -27,30 +18,18 @@
           <v-card-title primary-title>
             <div>
               <div>하단: {{site.copyright}}</div>
-              <div>블랙모드: {{site.dark}}</div>
+              <div>색상: {{site.dark}}</div>
             </div>
           </v-card-title>
           <v-divider light></v-divider>
           <v-card-actions>
-            <v-btn
-              flat
-              color="orange"
-              @click="putDialog(site)"
-            >수정</v-btn>
-            <v-btn
-              flat
-              color="error"
-              @click="delPage(site._id)"
-            >삭제</v-btn>
+            <v-btn flat color="orange" @click="putDialog(site)">수정</v-btn>
+            <v-btn flat color="error" @click="delSite(site._id)">삭제</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="500px"
-    >
+    <v-dialog v-model="dialog" persistent max-width="500px">
       <v-card>
         <v-card-title>
           <span class="headline">사이트 수정</span>
@@ -58,41 +37,27 @@
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
-              <v-flex
-                xs12
-                sm6
-                md4
-              >
+              <v-flex xs12 sm6 md4>
                 <v-text-field
                   label="사이트 이름"
-                  hint="이름"
+                  hint="아무거나"
                   persistent-hint
                   required
                   v-model="siteTitle"
                 ></v-text-field>
               </v-flex>
-
-              <v-flex
-                xs12
-                sm6
-                md4
-              >
+              <v-flex xs12 sm6>
                 <v-text-field
                   label="사이트 하단"
-                  hint="카피"
+                  hint="아무거나"
                   persistent-hint
                   required
                   v-model="siteCopyright"
                 ></v-text-field>
               </v-flex>
-
-              <v-flex
-                xs12
-                sm6
-                md4
-              >
+              <v-flex xs12 sm6>
                 <v-switch
-                  label="다크 모드"
+                  label="다크모드"
                   v-model="siteDark"
                 ></v-switch>
               </v-flex>
@@ -101,20 +66,14 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            flat
-            @click="putPage"
-          >수정</v-btn>
-          <v-btn
-            color="blue darken-1"
-            flat
-            @click.native="dialog = false"
-          >Close</v-btn>
+          <v-btn color="blue darken-1" flat @click="putSite">수정</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-snackbar v-model="snackbar">
+    <v-snackbar
+      v-model="snackbar"
+    >
       {{ sbMsg }}
       <v-btn
         color="pink"
@@ -127,71 +86,60 @@
   </v-container>
 </template>
 <script>
+
 export default {
-  data() {
+  data () {
     return {
       sites: [],
       dialog: false,
-      siteTitle: "",
-      siteCopyright: "",
+      siteTitle: '',
+      siteCopyright: '',
       siteDark: false,
       snackbar: false,
-      sbMsg: "",
-      putId: ""
-    };
+      sbMsg: '',
+      putId: ''
+    }
   },
-  mounted() {
-    this.getSites();
+  mounted () {
+    this.getSites()
   },
   methods: {
-    getSites() {
-      this.$axios
-        .get(`${this.$apiRootPath}manage/site`)
-        .then(r => {
-          this.sites = r.data.sites;
+    getSites () {
+      this.$axios.get('manage/site')
+        .then((r) => {
+          this.sites = r.data.sites
         })
-        .catch(e => {
-          this.pop(e.message);
-        });
-    },
-    putDialog(site) {
-      this.putId = site._id;
-      this.dialog = true;
-      this.siteTitle = site.title;
-      this.siteCopyright = site.copyright;
-      this.siteDark = site.dark;
-    },
-    putPage() {
-      this.dialog = false;
-      this.$axios
-        .put(`${this.$apiRootPath}manage/site/${this.putId}`, {
-          title: this.siteTitle,
-          copyright: this.siteCopyright,
-          dark: this.siteDark
+        .catch((e) => {
+          this.pop(e.message)
         })
-        .then(r => {
-          this.pop("페이지 수정 완료");
-          this.getSites();
-        })
-        .catch(e => {
-          this.pop(e.message);
-        });
     },
-    delPage(id) {
-      this.$axios
-        .delete(`${this.$apiRootPath}manage/site/${id}`)
-        .then(r => {
-          this.pop("페이지 삭제 완료");
-          this.getSites();
-        })
-        .catch(e => {
-          this.pop(e.message);
-        });
+    putDialog (site) {
+      this.putId = site._id
+      this.dialog = true
+      this.siteTitle = site.title
+      this.siteCopyright = site.copyright
+      this.siteDark = site.dark
     },
-    pop(msg) {
-      this.snackbar = true;
-      this.sbMsg = msg;
+    putSite () {
+      this.dialog = false
+      this.$axios.put(`manage/site/${this.putId}`, {
+        title: this.siteTitle, copyright: this.siteCopyright, dark: this.siteDark
+      })
+        .then((r) => {
+          this.pop('사이트 수정 완료')
+          this.getSites()
+        })
+        .catch((e) => {
+          this.pop(e.message)
+        })
+    },
+    delSite (id) {
+      this.pop('사이트 삭제하면 안되요!')
+    },
+    pop (msg) {
+      this.snackbar = true
+      this.sbMsg = msg
     }
   }
-};
+}
 </script>

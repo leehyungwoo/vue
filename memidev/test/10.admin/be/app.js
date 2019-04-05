@@ -7,22 +7,6 @@ var indexRouter = require('./routes');
 var bodyParser = require('body-parser')
 var cors = require('cors');
 var app = express();
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/leetest', { useNewUrlParser: true });
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    console.log('몽구스 연결')
-});
-
-app.get('/test', (req, res) => {
-    require('./models/userInfo').create({
-        id: '만들어짐'
-    })
-})
-
-
 
 app.use(cors())
 app.use(logger('dev'));

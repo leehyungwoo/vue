@@ -4,7 +4,7 @@ module.exports = {
     // dbUrl: 'mongodb://localhost:27017/nemv',
     admin: {
         id: 'leewoo',
-        pwd: '123456',
+        pwd: '1234',
         name: '관리자'
     },
     jwt: {

@@ -1,11 +1,23 @@
 {
-  "name": "nemv",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "NODE_ENV=development node ./be/bin/www",
-    "serve": "cd fe && yarn serve",
-    "pr": "cd fe && yarn && yarn build && cd ../be && yarn && cd .. && NODE_ENV=production PORT=80 node ./be/bin/www",
-    "pm2": "cd fe && yarn && yarn build && cd ../be && yarn && cd .. && pm2 start --env pr"
-  },
-  "dependencies": {}
+    "name": "nemv",
+    "version": "0.0.1",
+    "scripts": {
+<<<<<<< HEAD
+        "dev": "nodemon ./be/bin/www",
+        "serve": "cd fe && npm run serve",
+        "pr": "cd fe && npm run && npm run build && cd ../be && npm run && cd .. && NODE_ENV=production PORT=80 node ./be/bin/www",
+        "pm2": "cd fe && npm run && npm run build && cd ../be && npm run && cd .. && pm2 start --env pr"
+    },
+    "dependencies": {}
 }
+=======
+        "dev": "set NODE_ENV=development && nodemon ./be/bin/www",
+        "serve": "cd fe && npm run serve",
+        "pr": "cd fe && npm i && npm run build && cd ../be && npm i && cd ..&& set NODE_ENV=production && set PORT=80 && nodemon ./be/bin/www",
+        "pm2": "cd fe && npm i && npm run build && cd ../be && npm i && cd ..&& pm2 start --env production"
+    },
+    "dependencies": {
+        "pm2": "^3.4.0"
+    }
+}
+>>>>>>> parent of 4c44dca... 게시판 게시물 api 만들기

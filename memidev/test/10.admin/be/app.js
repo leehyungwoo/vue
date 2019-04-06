@@ -7,7 +7,14 @@ var indexRouter = require('./routes');
 var bodyParser = require('body-parser')
 var cors = require('cors');
 var app = express();
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/leetest', { useNewUrlParser: true });
 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    console.log('몽고디비연결')
+});
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());

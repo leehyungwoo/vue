@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-var User = {
-    id: String,
+var User = new mongoose.Schema({
+    id: { type: String, unique: true, index: true, },
     name: String,
     gender: String,
     email: String,
@@ -10,6 +10,6 @@ var User = {
     regDate: { type: Date },  //Date.now
     deleteDate: { type: Date },//Date.now
 
-};
+});
 
 module.exports = mongoose.model('users', User);

@@ -8,6 +8,7 @@
           <th>이름</th>
           <th>상태</th>
           <th>가입시간</th>
+          <th>업데이트시간</th>
           <th>탈퇴시간</th>
           <th>기능</th>
         </tr>
@@ -21,18 +22,20 @@
           <td>{{ todo.id }}</td>
           <td>{{ todo.name }}</td>
           <td>
+            <span v-if="todo.state == 0">탈퇴</span>
             <span v-if="todo.state == 1">정상</span>
-            <span v-else>탈퇴</span>
+            <span v-if="todo.state == 2">수정</span>
           </td>
           <td>{{ todo.RegTime }}</td>
+          <td>{{ todo.updateTime }}</td>
           <td>{{ todo.WdTime }}</td>
           <td>
             <button
-              v-if="todo.state == 1"
+              v-if="todo.state == 1 || todo.state == 2"
               v-on:click="withdraw(todo)"
             >탈퇴</button>
             <button
-              v-else-if="todo.state == 0"
+              v-else
               v-on:click="detailpoparray(index)"
             >삭제</button>
           </td>
@@ -52,6 +55,18 @@ export default {
     return {
       ctodos: Bus.todos
     };
+  },
+  mounted() {
+    Bus.$on("changeInfo", obj => {
+      this.ctodos.forEach(ctodo => {
+        if (ctodo.id === obj.preVal.id) {
+          ctodo.id = obj.chVal.id;
+          ctodo.name = obj.chVal.name;
+          ctodo.state = 2;
+          ctodo.updateTime = new Date().toLocaleTimeString();
+        }
+      });
+    });
   },
   methods: {
     detail(obj) {

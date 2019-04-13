@@ -16,10 +16,10 @@ export default new Vue({
                 id: m_obj.id,
                 name: m_obj.name,
                 state: 1,
+                updateTime: null,
                 RegTime: new Date().toLocaleTimeString(),
                 WdTime: null
             });
-            console.log(this.todos);
         },
         updatearray(obj) {
             this.updateobj = obj;

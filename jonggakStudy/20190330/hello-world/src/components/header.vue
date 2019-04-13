@@ -44,13 +44,15 @@ export default {
         id: "",
         name: ""
       },
-      uobj: null
+      uobj: null,
+      updateObj: null
     };
   },
   mounted() {
     Bus.$on("test", obj => {
       this.m_obj.id = obj.id;
       this.m_obj.name = obj.name;
+      this.updateobj = obj;
       this.uobj = true;
     });
   },
@@ -74,9 +76,14 @@ export default {
       return true;
     },
     updatearray() {
-      if (this.obj) {
-        this.obj.id = Bus.updateobj.id;
-        this.obj.name = Bus.updateobj.name;
+      if (this.m_obj) {
+        Bus.$emit("changeInfo", {
+          preVal: this.updateobj,
+          chVal: this.m_obj
+        });
+        this.uobj = false;
+        this.m_obj.id = null;
+        this.m_obj.name = null;
       }
     }
   }

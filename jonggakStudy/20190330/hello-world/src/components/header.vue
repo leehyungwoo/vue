@@ -1,6 +1,5 @@
 <template>
   <div style="padding-top:30px;width:600px;padding-left:30px;">
-
     <div>
       <Label for="id">아이디</Label>
       <input

@@ -215,6 +215,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$apiRootPath);
     for (var i = 10; i <= 40; i++) {
       this.userAges.push(i);
     }
@@ -223,7 +224,7 @@ export default {
   methods: {
     getReq() {
       axios
-        .get("http://localhost:3000/api/user", {
+        .get(`${this.$apiRootPath}/user`, {
           params: { user: "getMan" }
         })
         .then(r => {
@@ -235,7 +236,7 @@ export default {
     },
     postReq() {
       axios
-        .post("http://localhost:3000/api/user", {
+        .post(`${this.$apiRootPath}/user`, {
           name: "가정",
           age: 444
         })
@@ -248,7 +249,7 @@ export default {
     },
     putReq() {
       axios
-        .put("http://localhost:3000/api/user", {
+        .put(`${this.$apiRootPath}/user`, {
           user: "putMan"
         })
         .then(r => {
@@ -260,7 +261,7 @@ export default {
     },
     delReq() {
       axios
-        .delete("http://localhost:3000/api/user")
+        .delete(`${this.$apiRootPath}/user`)
         .then(r => {
           this.delMd = JSON.stringify(r.data);
         })
@@ -275,7 +276,7 @@ export default {
       this.dialog = false;
 
       axios
-        .post("http://localhost:3000/api/user", {
+        .post(`${this.$apiRootPath}/user`, {
           name: this.userName,
           age: this.userAge
         })
@@ -289,7 +290,7 @@ export default {
     },
     getUsers() {
       axios
-        .get("http://localhost:3000/api/user")
+        .get(`${this.$apiRootPath}/user`)
         .then(r => {
           this.users = r.data.users;
         })
@@ -306,7 +307,7 @@ export default {
     putUser() {
       this.dialog = false;
       axios
-        .put(`http://localhost:3000/api/user/${this.putId}`, {
+        .put(`${this.$apiRootPath}/user/${this.putId}`, {
           name: this.userName,
           age: this.userAge
         })
@@ -320,7 +321,7 @@ export default {
     },
     delUser(id) {
       axios
-        .delete(`http://localhost:3000/api/user/${id}`)
+        .delete(`${this.$apiRootPath}/user/${id}`)
         .then(() => {
           this.pop("사용자 삭제 완료");
           this.getUsers();

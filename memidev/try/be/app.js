@@ -6,16 +6,17 @@ var logger = require('morgan');
 var cors = require('cors');
 var app = express();
 
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+if (process.env.NODE_ENV === "development") {
+    app.use(cors());
+}
+
 app.use('/api', require('./routes/api'));
-
 app.use(express.static(path.join(__dirname, '..', 'fe', 'dist')));
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -60,7 +61,7 @@ mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, (e
 //     })
 
 
-    // User.updateOne({ _id: '5cb5bc09c0f41c072c859c0f' }, { $set: { age: 34 } })
+// User.updateOne({ _id: '5cb5bc09c0f41c072c859c0f' }, { $set: { age: 34 } })
 //     .then((r) => {
 //         console.log('updated')
 //         console.log(r)
@@ -84,3 +85,5 @@ mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, (e
 //     .catch(e => {
 //         console.error(e)
 //     })
+
+console.log(process.env.NODE_ENV)

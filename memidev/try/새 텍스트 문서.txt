@@ -1,0 +1,14 @@
+process.env.NODE_ENV
+process.env.PORT
+
+
+
+패키지 커스텀
+set NODE_ENV=xxx && SET PORT=80
+
+
+
+
+
+fe에서도 NODE_ENV사용가능하니 판단후
+fe에서 apiRootPath 전역등록.

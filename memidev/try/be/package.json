@@ -3,7 +3,9 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./bin/www"
+        "dev": "set NODE_ENV=development && set PORT=3000  &&  nodemon ./bin/www",
+        "pr": "set NODE_ENV=production && set PORT=80 && cd ../fe && npm run build && cd ../be/  && npm i && nodemon ./bin/www",
+        "start": "node ./bin/www"
     },
     "dependencies": {
         "cookie-parser": "~1.4.3",

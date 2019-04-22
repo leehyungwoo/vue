@@ -1,14 +1,33 @@
 process.env.NODE_ENV
 process.env.PORT
 
-
-
 패키지 커스텀
 set NODE_ENV=xxx && SET PORT=80
 
-
-
-
-
 fe에서도 NODE_ENV사용가능하니 판단후
 fe에서 apiRootPath 전역등록.
+
+
+pm2 start 경로
+pm2 monit
+pm2 log
+pm2 delete 이름
+
+pm2공홈
+Ecosystem -> pm2 init
+
+
+pm2 ecosystem 후 확인
+
+pm2 start ecosystem.config.js 가능.  pm2 start와 같음
+
+pm2 start --env production
+pm2 start --env development 이런식으로 가능
+
+(start ecosystem.config.js 에서 env_뒤에 있는것)
+(출처:https://pm2.io/doc/en/runtime/guide/ecosystem-file/)
+
+pm2 install pm2-logrotate (로그관리모듈)
+(출처:https://pm2.io/doc/en/runtime/guide/log-management/)
+pm2 set pm2-logrotate:retain 7  (7일)
+(출처:https://github.com/keymetrics/pm2-logrotate)

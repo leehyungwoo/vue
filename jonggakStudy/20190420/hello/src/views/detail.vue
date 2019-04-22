@@ -23,36 +23,37 @@
     >
     수정할이미지
     <input
-      @change="test()"
+      @change="appendFormData()"
       type="file"
       width="100"
     >
 
     <button @click="putUser">수정</button>
+    <button @click="$router.go(-1)">뒤로가기</button>
 
   </div>
 </template>
 
 <script>
-let data = new FormData();
+let data = null;
+
 export default {
   data() {
     return {
+      userNo: 0,
       userName: "",
       userTel: "",
       userAddress: "",
-      userNo: 0,
-      userPhoto: "",
-      file: null
+      userPhoto: ""
     };
   },
   mounted() {
     const user = this.$route.params.user;
+    this.userNo = user.no;
     this.userName = user.name;
     this.userTel = user.tel;
     this.userAddress = user.address;
     this.userPhoto = user.photo;
-    this.userNo = user.no;
   },
   methods: {
     putUser() {
@@ -63,27 +64,23 @@ export default {
           address: this.userAddress
         })
         .then(r => {
-          this.$router.push({ name: "home" });
+          axios
+            .post("/contacts/" + this.userNo + "/photo", data)
+            .then(r => {
+              this.$router.push({ name: "home" });
+            })
+            .catch(e => {
+              alert("putUser 오류2", e);
+            });
         })
         .catch(e => {
-          alert("추가오류", e);
-        });
-      axios
-        .post("/contacts/" + this.userNo + "/photo", {
-          data
-        })
-        .then(r => {
-          console.log("수정데이터", r);
-          alert("수정 성공");
-          this.$router.push({ name: "home" });
-        })
-        .catch(e => {
-          alert("추가오류", e);
+          alert("putUser 오류", e);
         });
     },
-    test() {
+    appendFormData() {
+      data = new FormData();
       var file = event.target.files[0];
-      data.append(file.name, file);
+      data.append("photo", file);
     }
   }
 };

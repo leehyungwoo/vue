@@ -1,0 +1,333 @@
+mongodb
+
+한 컴포넌트에 2개의 template을 if,else로 분기
+
+표준약관양식 - 공정거래위원회
+
+회원가입 -> 로그인  -> 유저관리게시판, 페이지관리게시판, -> 로그인 가능/불가능 영역
+
+
+
+count(*)
+
+as ctp (ctp로 담는다)
+
+
+*****게시판글 session사용해서 고객ID로 접속해보기
+
+
+
+
+pk값, int uniqueId
+
+아이디  vc50  uniqueId
+
+이름 vc
+
+성별 int  0남자 1여자
+
+이메일 vc
+
+암호 vc
+
+솔트, vc
+
+상태  init    가입:1  탈퇴:0  
+
+가입일 dateTime
+
+수정일 dateTime
+
+탈퇴일 dateTime
+
+
+ 
+
+
+prmoise.all()   =동시에 하지만 순서가 보장되지않는다(속도가빠르다)
+
+async function 함수(){
+	await test.abc();
+	await test.abc2()
+	await test.abc3()
+}
+
+async시점에서 promise의 reslove가 일어난후 test.abc()부터 순차적 실행된다 (속도가느리다)
+
+
+
+mysql index,  order by , limit
+
+검색창 만들어보기
+
+
+ubuntu(mint 포함) 명령 사용법
+
+docker 와 docker-compose 사용법
+
+
+큐 : 먼저온게 먼저나감
+스택: 마지막에온게 먼저나감
+ 
+react-context
+mobx
+redux
+
+
+publisherleewoo/leehyungwoo.github.io
+
+leewoo.gq
+
+
+
+쓰레드: 통로,길
+
+프로세스:처리하는과정,순서
+
+
+snipet
+rcc, rsc
+
+
+
+/* 공식이라고 생각해도 되는 부분 */
+constructor(props) {   
+        super(props)             //Component에서 Props를 받겠다는 의미, this.props를 쓰겠다는의미
+        this.state = {
+            value: 0
+        }
+
+        this.handerClick = this.handerClick.bind(this)    //이벤트 바인딩
+}
+
+
+
+컴포넌트에 값넣기 
+
+import React, { Component } from 'react';
+
+class CodeLap extends Component {
+    render() {
+        return (
+            <>
+                <h1>Hello {this.props.title}</h1>
+                <h2>{this.props.children}</h2>
+            </>
+        )
+    }
+}
+
+
+
+class App extends Component {
+    hititle = "hi";
+    render() {
+        return (
+            <div className="App">
+                <CodeLap title={this.hititle}>이사이</CodeLap>
+            </div>
+        );
+    }
+}
+
+
+export default App;
+
+
+
+
+
+
+props는 읽기전용
+state는 변경을 setState로
+
+import React, { Component } from 'react';
+import './App.css';
+import Myname from './components/Myname'
+
+class App extends Component {
+
+    abc = "hi hello 안녕"
+
+    render() {
+        return (
+            <div className="App">
+                <Myname test={this.abc}></Myname>
+            </div>
+        );
+    }
+
+}
+
+export default App;
+
+
+
+함수형으로 props를 받는방법
+
+
+import React from 'react';
+
+const Myname = ({ test }) => {         //비구조화할당
+    return (
+        <div>
+            안녕하세요 {test}
+        </div>
+    );
+};
+
+export default Myname;
+
+
+
+컴포넌트로 받는방법
+
+import React, { Component } from 'react'
+
+class Myname extends Component {
+    render() {
+        return (
+            <div>
+                {console.log(this.props.test)}
+            </div>
+        )
+    }
+}
+
+export default Myname
+
+
+
+
+
+
+setState를 사용하여 (this.state.a = this.state.a+1) or this.state.a++
+, 컴포넌트 자신이 업데이트되었는지 모른다.  (리랜더링 되지 않는다)
+
+import React, { Component } from 'react';
+
+class Counter extends Component {
+    state = {
+        num: 0
+    };
+    abc = {
+        test: 0
+    }
+
+
+
+    increaseNum = () => {
+        this.setState({ num: this.state.num + 1 })
+    }
+
+    decreaseNum = () => {
+        this.setState({ num: this.state.num - 1 })
+    }
+
+    increaseNum2 = () => {
+        this.abc.test++
+    }
+
+    decreaseNum2 = () => {
+        this.abc.test--
+    }
+    render() {
+        return (
+            <div>
+                <h1>카운터</h1>
+                <div>{this.state.num}</div>
+
+                <button onClick={this.increaseNum}>+</button>
+                <button onClick={this.decreaseNum}>-</button>
+                <br />
+                <div>{this.abc.test}</div>
+                <button onClick={this.increaseNum2}>+</button>
+                <button onClick={this.decreaseNum2}>-</button>
+            </div>
+        )
+    }
+
+}
+
+export default Counter
+
+
+
+
+
+arrow func를 안쓸경우
+
+ constructor(props) {
+        super(props)
+        this.increaseNum = this.increaseNum.bind(this)
+        this.decreaseNum = this.decreaseNum.bind(this)    
+}
+
+    increaseNum() {
+        console.log(this)
+        this.setState({ num: this.state.num + 1 })
+    }
+
+    decreaseNum() {
+        this.setState({ num: this.state.num - 1 })
+    }
+
+
+
+
+
+
+
+
+
+
+값을 받기만하는 컴포넌트는 함수형 컴포넌트, dump component를 한다.
+
+
+setState을 사용하면 리랜더링해준다
+
+부모컴포넌트가 리랜더링되면, 자식컴포넌트도 리랜더링된다.
+
+마운팅될때 ->componentDidMount  (만든 컴포넌트가 브라우저상에서 나타날때) //api 불러올때,이벤트 리스닝할때
+
+getDerivedStateFromProps props를 State와 동기화시키고싶을때)
+
+shouldComponentUpdate  (props값이 변환,setState 할때 바꿀지말지 사용할수있다. 즉 최적화시킬수있다. 중요ㅡ 단축키 scu)
+
+(shouldComponentUpdate는 요약하면 update를 막아줄지말지라고 보면된다 true값이 return되면 호출, false면 호출안함,   return값에따라 다음번 실행함수인 render 실행여부 판단)
+
+getSnapshotBeforeUpdate(바로 업데이트되어서 랜더링 되기 바로직전에 실행되는 함수. 스크롤의 위치 해당돔의 크기를 사전에 갖고오고싶을때)
+
+render()마운팅될때 시작되서 업데이팅 끝날때 같이끝남
+
+업데이팅될때 ->componentDidUpdate (브라우저상에서 props나 state가 바뀔때)
+
+언마운팅될때 ->componentWillUnmount (브라우저상에서 사라질때 )
+
+componentDidCatch : 오류를 잡기위해 부모컴포넌트에 등록
+
+
+
+
+리엑트에서는 불변성을 유지해줘야한다
+그래서 어떠한 값을 바꿀때는 setState를 사용해야한다.  (리랜더링)
+어떠한 배열이나 객체는, 그것을 기반으로(유지한채로)객체나 배열을 주입해준다.
+
+
+
+var numbers = [1,2,3,4,5]
+
+[
+...numbers.slice(0,2),
+9,
+...numbers.slice(3,5)
+]
+
+        numbers.map(
+            n => {
+                if (n === 3) {
+                    return 9
+                }
+                return n
+            }
+        )

@@ -2,7 +2,6 @@ module.exports = {
     apps: [{
         name: 'memv',   ///플젝이름
         script: './bin/www', //노드실행파일 위치
-
         // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
         instances: 1, //인스턴스갯수
         autorestart: true, //재시작

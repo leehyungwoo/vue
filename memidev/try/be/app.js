@@ -14,7 +14,6 @@ app.use(cookieParser());
 if (process.env.NODE_ENV === "development") {
     app.use(cors());
 }
-
 app.use('/api', require('./routes/api'));
 app.use(express.static(path.join(__dirname, '..', 'fe', 'dist')));
 

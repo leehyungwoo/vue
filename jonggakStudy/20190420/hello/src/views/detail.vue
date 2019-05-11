@@ -1,32 +1,33 @@
 <template>
   <div class="detail">
-    디테일
+
+    디테일<br />
     <input
       type="text"
       v-model="userName"
       placeholder="name"
-    >
+    ><br />
     <input
       type="text"
       v-model="userTel"
       placeholder="tel"
-    >
+    ><br />
     <input
       type="text"
       v-model="userAddress"
       placeholder="address"
-    >
+    ><br />
     <input
       type="image"
       :src="userPhoto"
       width="100"
-    >
-    수정할이미지
+    ><br />
+    수정할이미지<br />
     <input
       @change="appendFormData()"
       type="file"
       width="100"
-    >
+    ><br />
 
     <button @click="putUser">수정</button>
     <button @click="$router.go(-1)">뒤로가기</button>
@@ -57,16 +58,16 @@ export default {
   },
   methods: {
     putUser() {
-      axios
+      this.axios
         .put("/contacts/" + this.userNo, {
           name: this.userName,
           tel: this.userTel,
           address: this.userAddress
         })
-        .then(r => {
-          axios
+        .then(() => {
+          this.axios
             .post("/contacts/" + this.userNo + "/photo", data)
-            .then(r => {
+            .then(() => {
               this.$router.push({ name: "home" });
             })
             .catch(e => {
@@ -85,3 +86,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.detail {
+  width: 400px;
+  margin: 0 auto;
+  border: 1px solid black;
+  box-shadow: 4px 3px 0 #aaa;
+}
+</style>

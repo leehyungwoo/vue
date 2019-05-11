@@ -20,20 +20,37 @@
       <button @click="addUser">추가</button>
 
     </div>
-    <div class="f">
-      <h2>찾기</h2>
-      <input
-        type="text"
-        v-model="userSearch"
-        @keyup="keySearch"
-        placeholder="search"
-      >
 
-    </div>
-    <ul>
+    <b-table
+      id="my-table"
+      :items="users"
+      :per-page="perPage"
+      :current-page="currentPage"
+      small
+    >
+
+    </b-table>
+    <b-pagination
+      align="fill"
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+    ></b-pagination>
+    <h2>찾기</h2>
+    <input
+      type="text"
+      v-model="userSearch"
+      @keyup="keySearch"
+      placeholder="search"
+    >
+    <ul id="view">
       <li
         v-for="(user,index) in users"
         :key="user.no"
+        :per-page="perPage"
+        :current-page="currentPage"
+        small
       >
         <p><b>{{index}}</b></p>
         <p>no: {{user.no}}</p>
@@ -55,9 +72,14 @@
 </template>
 
 <script>
+import { setTimeout } from "timers";
+var timer;
+
 export default {
   data() {
     return {
+      perPage: 5,
+      currentPage: 1,
       users: [],
       userName: "",
       userTel: "",
@@ -68,9 +90,14 @@ export default {
   mounted() {
     this.getUsers();
   },
+  computed: {
+    rows() {
+      return this.users.length;
+    }
+  },
   methods: {
     getUsers() {
-      axios
+      this.axios
         .get("/contacts")
         .then(r => {
           this.users = r.data.contacts;
@@ -80,13 +107,13 @@ export default {
         });
     },
     addUser() {
-      axios
+      this.axios
         .post("/contacts/", {
           name: this.userName,
           tel: this.userTel,
           address: this.userAddress
         })
-        .then(r => {
+        .then(() => {
           this.getUsers();
         })
         .catch(e => {
@@ -94,9 +121,9 @@ export default {
         });
     },
     delUser(user) {
-      axios
+      this.axios
         .delete("/contacts/" + user.no)
-        .then(r => {
+        .then(() => {
           this.getUsers();
         })
         .catch(e => {
@@ -104,17 +131,26 @@ export default {
         });
     },
 
-    keySearch(e) {
-      console.log(e.target.value);
-      //널이면 전체랜더링
-      axios
-        .get("/contacts/search/" + this.userSearch)
-        .then(r => {
-          this.users = r.data;
-        })
-        .catch(e => {
-          alert("searchUser 오류", e);
-        });
+    keySearch() {
+      if (!timer && this.userSearch.length > 1) {
+        timer = setTimeout(
+          function() {
+            timer = null;
+            this.axios
+              .get("/contacts/search/" + this.userSearch)
+              .then(r => {
+                this.users = r.data;
+              })
+              .catch(e => {
+                alert("searchUser 오류", e);
+              });
+          }.bind(this),
+          600
+        );
+      }
+      if (this.userSearch.length === 0) {
+        this.getUsers();
+      }
     }
   }
 };
@@ -127,11 +163,21 @@ export default {
   list-style: none;
   border: 1px solid black;
   box-shadow: 4px 3px 0 #aaa;
+  padding-bottom: 10px;
 }
-li {
+.f:nth-last-of-type(1) {
+  margin-bottom: 30px;
+}
+
+#view {
+  /* column-gap: 10px; */
+  /*column-width: 200px; */
+}
+#view li {
   float: left;
-  width: 200px;
+  width: 250px;
   height: 400px;
+  overflow-y: hidden;
   list-style: none;
   border: 1px solid black;
   box-shadow: 4px 3px 0 #aaa;

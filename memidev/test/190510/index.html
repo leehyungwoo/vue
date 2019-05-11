@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        var a = ['가', '나', '다', '라', '마'];
+        var b = ['a', 'b', 'c', 'd', 'e'];
+
+
+        Array.prototype.myForEach = function (callback) {
+            for (var i = 0, lng = this.length; i < lng; i++) {
+                callback(this[i], i)
+            }
+        }
+        console.group('a')
+        a.myForEach(function (val, index) {
+            console.log(val, ' index =', index)
+        })
+        console.groupEnd()
+
+        console.group('b')
+        b.myForEach(function (val, index) {
+            console.log(val, ' index =', index)
+        })
+        console.groupEnd()
+    </script>
+</body>
+
+</html>

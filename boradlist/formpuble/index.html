@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./main.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>logo</h1>
+  <div id="wrap">
+    <select class="paging">
+      <option value="0">ViaStelle Rider</option>
+      <option value="1" selected>DaDa Rider</option>
+    </select>
+    <section class="user">
+      <h2 class="id">用户ID / User ID<span>48E51B</span></h2>
+      <p><span>2PM ~ 3PM</span> <strong>在选定时间段尽快送达 </strong><button>print</button></p>
+    </section>
+
+    <table>
+      <colgroup>
+        <col width="48%">
+        <col width="4%">
+        <col width="48%">
+      </colgroup>
+      <tr>
+        <td class="receiver_address">
+          <section>
+            <h2>收货地点<span>receiver address</span></h2>
+            <textarea id="receiver_address" rows="5"></textarea>
+            <div>
+              <button class="btn_type1 btn_reload">reload</button>
+              <button class="btn_type1 btn_checkAddress">在地图确认地址<span>check address</span></button>
+            </div>
+          </section>
+        </td>
+        <td></td>
+        <td class="transport_address">
+          <section>
+            <h2>发货地点<span>transport address</span></h2>
+            <textarea id="transport_address" rows="3">镇宁路465弄小区161号E楼101</textarea>
+          </section>
+        </td>
+      </tr>
+      <tr>
+        <td class="receiver_phone_number">
+          <section>
+            <h2>收货人电话<span>receiver phone number</span></h2>
+            <textarea id="receiver_phone_number"></textarea>
+          </section>
+        </td>
+        <td></td>
+        <td class="order_time layoutComponent">
+          <section>
+            <h2>发单时间<span>order time</span></h2>
+            <div>
+              <p>
+                <label for="chk1">立即发单</label>
+                <input type="checkbox" id="chk1" />
+              </p>
+
+              <p>
+                <label for="time">预约发单</label>
+                <select name="time" id="time">
+                  <option label="0" value="0">0</option>
+                </select>
+                :
+                <select>
+                  <option label="0" value="0">0</option>
+                </select>
+              </p>
+            </div>
+          </section>
+        </td>
+      </tr>
+      <tr>
+        <td class="product_price layoutComponent ">
+          <section>
+            <h2>货款<span>product price</span></h2>
+            <p><input type="text" value="86">元</p>
+          </section>
+        </td>
+        <td>
+        </td>
+        <td class="layoutComponent">
+          <section>
+            <h2>发单时间<span>order time</span></h2>
+            <p>
+              <select class="hlayout">
+                <option label="0" value="0"></option>
+              </select>
+            </p>
+          </section>
+        </td>
+      </tr>
+      <tr>
+        <td class="weight layoutComponent">
+          <section>
+            <h2>重量<span>weight</span></h2>
+            <p>
+              <button class="btn_sumin">+</button>
+              <label for="inp_weight" class="blind">weight</label>
+              <input class="input_sumin" type="text" id="inp_weight" value="0">元
+              <button class="btn_sumin">-</button>
+            </p>
+          </section>
+        </td>
+        <td>
+        </td>
+        <td class="layoutComponent">
+          <section>
+            <h2>保价<span>insurance</span></h2>
+            <p>
+              <select class="hlayout">
+                <option label="0" value="0"></option>
+              </select>
+            </p>
+          </section>
+        </td>
+      </tr>
+      <tr>
+        <td class="weight">
+          <section>
+            <h2>小费<span>add tip</span></h2>
+            <p>
+              <button class="btn_sumin">+</button>
+              <input class="input_sumin" type="text" id="weight" value="0">元
+              <button class="btn_sumin">-</button>
+            </p>
+          </section>
+        </td>
+        <td>
+        </td>
+        <td class="layoutComponent">
+          <section>
+            <h2>备注<span>remark</span></h2>
+            <p>
+              <textarea rows="7"></textarea>
+            </p>
+          </section>
+        </td>
+      </tr>
+    </table>
+    <section class="result">
+      <h2 class="blind">result</h2>
+      <strong>￥11.50 <span>距离5.6公里</span></strong>
+      <div>
+        <button class="btn_type1">
+          下单
+          <span>
+            call rider
+          </span>
+        </button>
+        <button class="btn_type1">
+          取消
+          <span>
+            cancel
+          </span>
+
+        </button>
+      </div>
+    </section>
+
+    <section class="order_number">
+      <h2>订单号<span>Order number</span></h2>
+      <p>S201809177EEA1596</p>
+      <table>
+        <colgroup>
+          <col width="4%">
+          <col width="92%">
+          <col width="4%">
+        </colgroup>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td class="tfoot">
+            
+              <p class="total_amount"><span>356.0 </span>元</p>
+              <div>
+                  总计
+                <span>
+                    Total
+                </span>
+                  
+              </div>
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
+        <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <ul>
+              <li>
+                <span>05</span>
+                <p>烤洋葱配螃蟹曲奇沙拉 Roasted Langoustine with Crab Cookie Salad</p>
+                <i> ⅹ 2</i>
+              </li>
+              <li>
+                <span>05</span>
+                <p>烤洋葱配螃蟹曲奇沙拉 Roasted Langoustine with Crab Cookie Salad</p>
+                <i> ⅹ 2</i>
+              </li>
+              <li>
+                <span>05</span>
+                <p>烤洋葱配螃蟹曲奇沙拉 Roasted Langoustine with Crab Cookie Salad</p>
+                <i> ⅹ 2</i>
+              </li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <p class="total_amount"><span>356.0 </span>元</p>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <ul class="discount">
+              <li>
+                  <p>新会员优惠券 Welcome coupon</p>
+                  <i> <span>-50 </span>元</i>
+              </li>
+              <li>
+                  <p>新会员优惠券 Welcome coupon</p>
+                  <i> <span>-50 </span>元</i>
+              </li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+
+
+      </table>
+    </section>
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+  <script src="./jquery/select.js"></script>
+</body>
+
+</html>

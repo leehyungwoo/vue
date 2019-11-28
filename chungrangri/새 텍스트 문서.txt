@@ -1,0 +1,430 @@
+피들러
+
+
+
+
+-해야할것-
+vuex
+nuxt
+타입스크립트
+
+교재에서는 axios,상태관리,단위테스트,서버사이드랜더링
+
+
+
+
+
+Coupang FINTECH UI Engineer 과제
+
+ todo 웹어플리케이션(자신의 할일을 기록하고 관리하는 어플리케이션) 제작
+
+ 개발 스펙
+ 1. todo 리스트 출력
+ 2. todo 추가, 수정, 삭제
+ 3. todo 상태에 따른 필터링(전체보기, 할일보기, 완료된일 보기)
+ - 예시: http://todomvc.com/examples/react/#/
+ - 모든 라이브러리 및 프레임워크 사용 가능함(React, Vue, Angular 등)
+ - localStorage 기능은 스펙에서 제외함.
+
+
+ 평가 항목
+ 1. 모든 기능 구현보다 좋은 코드에 초점을 맞춰야 함.
+ 2. 개발 및 빌드 환경을 설명 할 수 있어야 함.
+ 3. SPA의 형태로써, Ajax를 전제로 함.
+ 4. css는 평가에서 제외됨.
+
+
+ 가산점
+ 1. TypeScript 또는 Flow를 이용한 정적 타입 검사
+ 2. 단위 테스트 혹은 E2E 테스트 적용
+ 3. Server Side Rendering 적용
+ 4. Node.js 혹은 WAS 등을 기반으로 하는 로컬 서버 구축 후 Restful API 작성
+ 
+
+준비
+https://mail.google.com/mail/u/0/?tab=wm#inbox/161d5b2906a27d93
+https://console.firebase.google.com/project/tr-book/authentication/users
+
+
+
+활용
+공유: https://bitbucket.org/ 
+db:파이어베이스 
+ui작업: materializecss (url:http://materializecss.com/)
+http://next.materializecss.com/text-inputs.html
+프레임워크:https://github.com/nuxt-community/typescript-template/blob/master/template/pages/index.vue
+
+
+
+어플기획
+리스트,
+상세보기 ->어디까지 봤는지 보기
+검색
+
+용어:
+요구사항명세서(무슨기능넣을지)
+uid:유니크 아이디
+
+
+
+
+ui구성은  
+
+어플 독서다이어리 기준으로.(달력,설정 이런건 없어도됨)
+
+책에 페이지정보를 검색 api로
+
+책장모아보기,책장추가 등등
+
+책 얼마나 읽었는지 상세보기
+
+
+
+ 
+
+
+
+
+
+
+구성
+main,   
+header, > nav( login btn )
+container > card, detail(디테일도 modal로)
+sidebar
+floatringbutton (transition 효과 modal로 검색창)  [내역할]
+
+
+https://github.com/nuxt-community/typescript-template
+
+
+파이어베이스,gmail
+
+
+네이버api를 사용하여 제작
+https://developers.naver.com/docs/search/book/
+서버는 firebase   클라우드 function
+
+
+nuxt 
+https://github.com/nuxt-community/typescript-template/blob/master/template/pages/index.vue
+
+
+
+
+
+
+
+
+
+
+녹화 동영상
+
+vue init nuxt-comunity/typescrip-template tr-book
+cdn은 가능하면안쓰기
+
+1.파이어베이스 생성
+
+2.메테리얼라이즈 넣기   
+(
+이전에 받아놓은것 assets 폴더에 넣음
+sass 파일이있어서 node,sass,sass-loader 설치
+nuxt링크 참고해서 nuxt.config.js에 css연동하기
+메테리얼라이즈 연동 잘되었는지 <p v-for"">로 확인
+연동이 안되었음,
+영상 스킵(넘기기)
+
+3.파이어베이스 플러그인 연동하기.
+index.vue 하나로 모아서 export
+
+vue 확인한건 people를 vuex에 저장한것.
+$store.state.people[0] 스토어 가져오는방법 (원래는 이게맞으나, 아래것으로사용)
+@State people도 스토어가져오는방법 ( vuex-class라는 모듈때문에 @State  사용가능 )
+fetch(a,b){return store.state.people}대신에 @State 로 사용
+
+async,await (편의상) 사용하기이해 tsconfig.json에서 es2016 추가 
+
+
+회원로그인창 만들기위해 NavBar 공통영역이기때문에 컴포넌트로 만드려고 제작
+
+materialize로 디자인 제작
+
+firebase와 연동하기위해 사이트 firebase 접속
+
+->구글로그인 하는것으로 선회
+
+넉스트 경로설정 오류 수정(경로 ts문제)
+
+로그인창띄우면 에러같은거뜨는데, 플젝 등록을 안해서 뜨는 오류니 무시
+
+
+4.로그아웃버튼 제작.
+nuxt사용하면서 arrow func 사용가능하나 this문제가있기때문에 가능하면 arrow fun 사용 자제
+
+
+$store.state.currUser.displayName  파이어베이스에서 제공되는 객체
+
+개발자도구로확인해보니 업데이트가안되서 null값이 나옴
+
+뭔가 오류라 디버깅(스킵구간)
+
+타입스크립트 문법적용(빨간 밑줄 사라짐 일단 이건 ts언어로 해결)
+
+이후 맨마지막쪽 보기
+
+
+
+
+ 
+
+
+
+
+파이어베이스,구글로그인이 생략되어있음
+
+호스팅 아이디가없어서 임의로 주소 넣음
+
+branch따서 하기
+
+url이 잡힘
+
+
+
+
+
+
+
+깃 branch따서 작업
+
+
+
+
+
+ api요청 부분 
+vue 내에서 axios쓰면 
+ 저희 ssr아니까 서버에서 요청하고 하면돼서 nuxt문서 참고해보시면 asyncData라는부분이 있어요
+
+
+
+test()아래에
+
+axios 사용해서
+
+
+https://developers.naver.com/docs/search/book/
+
+
+
+https://openapi.naver.com/v1/search/book.json  이게 json으로 받는 요청주소
+
+
+
+벨로퍼트 dev.log 컴포넌트 로드 후 ajax 요청
+
+
+
+
+아까 search부분을 change이벤트로 달았는데 _debounce를 사용하시거나 이벤트를 다른거로 바꾸시면 될것같아요~
+근데 설정에 underscore가 없네요
+[김찬중] [오후 2:55] 형우님이 api요청 부분 해주실수 있으신가요
+[김찬중] [오후 2:55] vue 내에서 axios쓰면 될것같은데
+[김찬중] [오후 2:55] 저희 ssr아니까 서버에서 요청하고 하면돼서 nuxt문서 참고해보시면 asyncData라는부분이 있어요
+[김찬중] [오후 2:56] https://ko.nuxtjs.org/api/#asyncdata-%EB%A9%94%EC%86%8C%EB%93%9C
+[김찬중] [오후 2:56] 서버쪽 세부 코드는 제가 시간될때 만들어서 올릴게요
+[김찬중] [오후 2:57] 아 그리고 지금 제가 풀해서 수정해서 올릴게요
+[김찬중] [오후 2:57] 브랜치 따서 작업하는 방향으로해요
+[김승미] [오후 2:57] 넵
+[Leewoo] [오후 2:57] api요청은 어디에서해야되요? (상황파악안되요~)
+[김찬중] [오후 2:58] axios쓰셔서
+[김찬중] [오후 2:58] https://developers.naver.com/docs/search/book/
+[김찬중] [오후 2:58] https://openapi.naver.com/v1/search/book.json
+[김찬중] [오후 2:58] 이게 json으로 받는 요청 주서구요
+[김찬중] [오후 2:58] 주소구요
+[김승미] [오후 2:58] 코드요 ㅎ
+[김찬중] [오후 2:59] 지금 화면 보고계신가요?
+[Leewoo] [오후 2:59] 네
+[Leewoo] [오후 2:59] 화면이 근데 좀 끊겨서 버퍼가 심해요 ㅜㅜ
+[김승미] [오후 3:00] 파이어베이스랑 타입스크립트 모르니ㅏ
+[김승미] [오후 3:00] 봐도 잘 모르겠어요 ㅠ
+[김찬중] [오후 3:00] 네 그부분 서버쪽이라 설계를 같이 얘기해봐야될것같아서 같이 하자고 말씀드렸어요
+[김승미] [오후 3:00] 네네 ㅎㅎ
+[김승미] [오후 3:01] 대강은 이해는 돼써요 ㅎ
+[김승미] [오후 3:05] 얘기하면서 하고 계시는거예요?
+[Leewoo] [오후 3:05] 저는 통화 끊겼어요
+[김승미] [오후 3:05] 아 네네 ㅋㅋ
+[김승미] [오후 3:05] 찬중님 계속 보고 계셔서 ㅎ
+[김승미] [오후 3:05] 나만 연결 안되있나했어요 ㅎ
+[김찬중] [오후 3:06] 아 이게 클라에서 요청해야되는거죠.
+[김찬중] [오후 3:07] 요거 통해서 해주시면 될것같아요
+[Leewoo] [오후 3:07] 상황파악이잘안되지만
+[Leewoo] [오후 3:07] 평가항목에
+[Leewoo] [오후 3:07]  3. SPA의 형태로써, Ajax를 전제로 함.
+[김찬중] [오후 3:07] XMLhttp가 잘될진 모르겠는데
+[Leewoo] [오후 3:07] 이렇게써있어요
+[김찬중] [오후 3:08] axios써도 되겠네요
+[김찬중] [오후 3:09] 이런식으로 하시면 될것같아요
+[Leewoo] [오후 3:11] 한번 해보고 안되면 질문드릴께요
+[김찬중] [오후 3:11] 네 중간중간 질문주세요
+[김승미] [오후 3:11] axios 쓰면 될 것 같아요
+[김찬중] [오후 3:14] 책 검색해서 저장하는부분은 rest 되면 말씀드릴게요 그때 다시 요청해서 추가하면 될것같아요
+[김찬중] [오후 3:14] 우선은 검색해서 화면에 뿌려주는것만 해주시면 될것같습니다
+[Leewoo] [오후 3:14] 넵
+[김승미] [오후 3:14] 네넵~
+[김승미] [오후 3:14] 고생했어요 찬중님 ㅎ
+[김찬중] [오후 3:14] 네네 수고하셨어요
+[Leewoo] [오후 3:14] 수고하셨어여
+[김찬중] [오후 3:57] 아까 search부분을 change이벤트로 달았는데 _debounce를 사용하시거나 이벤트를 다른거로 바꾸시면 될것같아요~
+[Leewoo] [오후 3:58] 넵
+[김찬중] [오후 3:58] 근데 설정에 underscore가 없네요
+[Leewoo] [오후 4:00] firebase-functions인가 이것도 없었던거같아여
+[김찬중] [오후 4:01] 그부분은 신경안쓰셔도돼요
+[김찬중] [오후 4:01] server내부에 있어요
+[김승미] [오후 4:03] ㅎㅎ 열심히 하시네요 ㅎ
+[Leewoo] [오후 4:07] 사진
+[Leewoo] [오후 4:07] 파이어베이스 펑션 설치 안하니까 위같이 오류나요
+
+[Leewoo] [오후 4:08] 설치 해야되는부분인가여??
+[김찬중] [오후 4:08] 어떤작업하시는데요?
+[김찬중] [오후 4:08] server부분 소스는 그냥 두시면될텐데
+[Leewoo] [오후 4:09] axios작업이요~
+[김찬중] [오후 4:09] 지금 어떤 명령어 쓰신건가요
+[Leewoo] [오후 4:09] npm run dev입니다
+[김찬중] [오후 4:09] 경로는요?
+[김찬중] [오후 4:10] 아 근데 우선 로컬호스트 들어가보세요
+[Leewoo] [오후 4:10] 사진
+[Leewoo] [오후 4:10] 로컬호스트요~?
+[김찬중] [오후 4:10] localhost:3000
+[Leewoo] [오후 4:11] 계속 로딩바만생기구 안들어가져요
+[김찬중] [오후 4:11] 근데 서버코드를 분리해야될까요 흠 저게 nuxt에서 server코드까지 처리해서 그런것같은데 설정 알아봐야겠네요
+[Leewoo] [오후 4:12] 일단은 git하지말구 연습하고있어야겠네여
+[김찬중] [오후 4:12] 우선
+[김찬중] [오후 4:13] functions까지 들어가셔서 npm i랑 npm i ?only=dev 두개 실행하시고
+[김찬중] [오후 4:13] 그다음에 하시면 될거에요
+[김찬중] [오후 4:13] 제코드에선 에러 안나고 잘되네요
+[김찬중] [오후 4:13] 분리는 나중에 고려해봐야겠네요
+[Leewoo] [오후 4:16] 사진
+[Leewoo] [오후 4:16] 오류나요 ㅜㅜ
+[김찬중] [오후 4:18] - 두개에요
+[Leewoo] [오후 4:22] 사진
+[Leewoo] [오후 4:23] 깃에서 다시받았어요
+엇 npm i했는데 ... node_module이 왜 안보이지..
+[Leewoo] [오후 4:23] 아
+
+
+
+
+
+
+
+
+to-book-bak3로 작업.
+
+
+nuxt SSR
+
+정적파일로 뽑으려면 npm 제너레이터
+
+(npm run generate)
+
+(cmd실행시 npm 뒤에는 run을 붙이기)
+
+
+
+
+
+
+
+
+SearchModal.vue에서
+
+this.$store.dispatch('searchBooks', this.queryText)  는
+
+store디렉토리에 index.tx파일에 searchBooks함를 등록해놓은것.
+
+거기에 
+
+await axios.post(`/api/search`, {
+      query: query,
+    }).then(res => {
+      commit("setSearchedBooks", res.data)
+    })
+
+로 나와있는데
+
+url 경로가 /api/search 상대경로로 되어있는데 
+
+api디렉터리에 index.js파일을 보면
+
+router.post('/search', (req, res) => {
+  console.log('body', req.body);
+  console.log('query', req.body.query);
+  const query = req.body.query
+  axios.get('https://openapi.naver.com/v1/search/book',{
+    params:{
+      query:query,
+    },
+    headers: {
+      "X-Naver-Client-Id": '7KWavL0x4r0xrNyK670I',
+      "X-Naver-Client-Secret":'HT3ayYGuYm'        
+    }
+  }).then(response => {
+    res.send(response.data.items)
+  }).catch(error => {
+    res.status(400).json({ message: 'Error' })
+  })
+})
+
+
+로 등록되어있음
+
+
+
+
+
+
+
+
+
+
+
+
+
+@는 타입스크립트언어
+
+
+
+
+
+isbn이 숫자 띄어쓰고 숫자가나오는데
+
+뒤에껏만 splite로 짤라서 보내면된다.
+
+
+ 
+
+
+
+
+
+컴포넌트 하나 만들어서
+
+클릭했을때 상세페이지 보이도록
+
+
+http://next.materializecss.com/collapsible.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+컴포넌트 여러개 만들고 의존성 분리 해볼것...
+
+

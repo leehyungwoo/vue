@@ -1,0 +1,490 @@
+@charset "UTF-8";
+.order-detail {
+  height: 100%;
+  overflow-y: auto;
+  padding: 30px 52px;
+  box-sizing: border-box; }
+  .order-detail * {
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    color: #4a4a4a; }
+  .order-detail button {
+    background: transparent;
+    border: none;
+    border-radius: 0; }
+  .order-detail li {
+    list-style: none; }
+  .order-detail .blind {
+    height: 0;
+    overlfow: hidden; }
+  .order-detail .rider {
+    text-align: center; }
+    .order-detail .rider .rider__select {
+      padding: 13px 32px;
+      font-size: 20px;
+      border-radius: 3px; }
+      .order-detail .rider .rider__select option[value="0"] {
+        color: #f5a623;
+        padding: 10px 0; }
+      .order-detail .rider .rider__select option[value="1"] {
+        color: #298afa;
+        padding: 10px 0; }
+  .order-detail .user {
+    padding: 38px 0 19px;
+    border-bottom: 1px solid #727272; }
+    .order-detail .user .user__id {
+      padding-bottom: 18px; }
+      .order-detail .user .user__id > span {
+        font-size: 17px;
+        color: #9b9b9b;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 15px; }
+    .order-detail .user .user__delivery .user__time {
+      border: 1px solid #979797;
+      border-radius: 3px;
+      display: inline-block;
+      color: #9b9b9b;
+      padding: 10px 15px;
+      vertical-align: middle; }
+    .order-detail .user .user__delivery .user__asap {
+      display: inline-block;
+      vertical-align: middle;
+      color: #d0021b;
+      padding-left: 10px; }
+    .order-detail .user .user__delivery .user__print {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #ccc;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 5px;
+      margin-left: 20px;
+      background: url("../assets/print.svg") center no-repeat;
+      background-size: 60%;
+      color: #727272; }
+  .order-detail .order__dada-rider {
+    overflow: hidden;
+    padding-top: 13px; }
+    .order-detail .order__dada-rider .order-info1 {
+      float: left;
+      width: 50%;
+      padding-right: 20px;
+      box-sizing: border-box; }
+      .order-detail .order__dada-rider .order-info1 .order-info1__con input[type='text'] {
+        border: 1px solid #ccc;
+        padding: 0 5px;
+        width: 100%;
+        text-align: left;
+        height: 30px;
+        line-height: 30px;
+        color: #9b9b9b; }
+      .order-detail .order__dada-rider .order-info1 .order-info1__con textarea {
+        border: 1px solid #ccc;
+        padding: 0 5px;
+        width: 100%;
+        text-align: left;
+        line-height: 30px;
+        color: #9b9b9b;
+        height: 73px; }
+      .order-detail .order__dada-rider .order-info1 .order-info1__address {
+        position: relative;
+        padding-bottom: 15px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__address .order-info1__tit {
+          padding-bottom: 5px;
+          line-height: 1; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__address .order-info1__tit span {
+            font-size: 10px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__address .order-info1__reload {
+          width: 30px;
+          height: 30px;
+          border-radius: 20px;
+          position: absolute;
+          left: 100px;
+          top: -3px;
+          background: #268aff url("https://viastelle-main.oss-cn-shanghai.aliyuncs.com/resources/img/hub/artboard.png") no-repeat 50% 50%; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__address .order-info1__check-address {
+          height: 30px;
+          box-sizing: border-box;
+          padding-top: 2px;
+          border-radius: 20px;
+          position: absolute;
+          right: 0;
+          top: -3px;
+          color: #fff;
+          font-size: 10px;
+          line-height: 0.8;
+          padding-left: 30px;
+          padding-right: 10px;
+          background: #268aff url(" https://viastelle-main.oss-cn-shanghai.aliyuncs.com/resources/img/hub/artboard%402x.png") no-repeat 10px 50%;
+          background-size: 15px auto; }
+      .order-detail .order__dada-rider .order-info1 .order-info1__receiver {
+        padding-bottom: 43px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__receiver .order-info1__tit {
+          padding-bottom: 5px;
+          line-height: 1; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__receiver .order-info1__tit span {
+            font-size: 10px; }
+      .order-detail .order__dada-rider .order-info1 .order-info1__price {
+        padding-bottom: 15px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__price .order-info1__tit {
+          width: 80px;
+          padding-bottom: 5px;
+          line-height: 1;
+          display: inline-block;
+          vertical-align: top; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__price .order-info1__tit span {
+            font-size: 10px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__price .order-info1__con {
+          display: inline-block;
+          vertical-align: top; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__price .order-info1__con > input {
+            border: 1px solid #ccc;
+            padding: 5px;
+            color: #9b9b9b;
+            width: 50px;
+            text-align: center;
+            display: inline-block;
+            height: 27px;
+            box-sizing: border-box;
+            margin-right: 5px; }
+      .order-detail .order__dada-rider .order-info1 .order-info1__weight, .order-detail .order__dada-rider .order-info1 .order-info1__add-tip {
+        padding-bottom: 15px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__weight .order-info1__tit, .order-detail .order__dada-rider .order-info1 .order-info1__add-tip .order-info1__tit {
+          width: 80px;
+          padding-bottom: 5px;
+          line-height: 1;
+          display: inline-block;
+          vertical-align: top; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__weight .order-info1__tit span, .order-detail .order__dada-rider .order-info1 .order-info1__add-tip .order-info1__tit span {
+            font-size: 10px; }
+        .order-detail .order__dada-rider .order-info1 .order-info1__weight .order-info1__updown, .order-detail .order__dada-rider .order-info1 .order-info1__add-tip .order-info1__updown {
+          display: inline-block;
+          vertical-align: top; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__weight .order-info1__updown span, .order-detail .order__dada-rider .order-info1 .order-info1__add-tip .order-info1__updown span {
+            width: 60px;
+            height: 25px;
+            text-align: center;
+            display: inline-block;
+            vertical-align: top;
+            border: 1px solid #ccc;
+            padding-top: 3px;
+            box-sizing: border-box;
+            margin: 0 3px; }
+          .order-detail .order__dada-rider .order-info1 .order-info1__weight .order-info1__updown button, .order-detail .order__dada-rider .order-info1 .order-info1__add-tip .order-info1__updown button {
+            font-weight: 700;
+            display: inline-block;
+            vertical-align: top;
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ccc;
+            font-size: 15px; }
+    .order-detail .order__dada-rider .order-info2 {
+      float: left;
+      width: 50%;
+      padding-left: 20px;
+      box-sizing: border-box; }
+      .order-detail .order__dada-rider .order-info2 .order-info2__con input[type='text'] {
+        border: 1px solid #ccc;
+        padding: 0 5px;
+        width: 100%;
+        text-align: left;
+        height: 30px;
+        line-height: 30px;
+        color: #9b9b9b; }
+      .order-detail .order__dada-rider .order-info2 .order-info2__con textarea {
+        border: 1px solid #ccc;
+        padding: 0 5px;
+        width: 100%;
+        text-align: left;
+        line-height: 30px;
+        color: #9b9b9b;
+        height: 50px; }
+      .order-detail .order__dada-rider .order-info2 .order-info2__address {
+        position: relative;
+        padding-bottom: 43px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__address .order-info2__tit {
+          padding-bottom: 5px;
+          line-height: 1; }
+          .order-detail .order__dada-rider .order-info2 .order-info2__address .order-info2__tit span {
+            font-size: 10px; }
+      .order-detail .order__dada-rider .order-info2 .order-info2__time {
+        padding-bottom: 35px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info2__tit {
+          width: 80px;
+          padding-bottom: 5px;
+          line-height: 1;
+          display: inline-block;
+          vertical-align: top; }
+          .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info2__tit span {
+            font-size: 10px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info1__time-select {
+          display: inline-block;
+          vertical-align: top; }
+          .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info1__time-select div {
+            padding-bottom: 10px; }
+            .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info1__time-select div label {
+              color: #9b9b9b;
+              padding-right: 5px; }
+            .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info1__time-select div input[type='checkbox'] {
+              display: inline-block; }
+            .order-detail .order__dada-rider .order-info2 .order-info2__time .order-info1__time-select div select {
+              height: 25px;
+              min-width: 60px;
+              border: 1px solid #ccc; }
+      .order-detail .order__dada-rider .order-info2 .order-info2__coupon, .order-detail .order__dada-rider .order-info2 .order-info2__insurance {
+        position: relative;
+        padding-bottom: 20px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__coupon .order-info2__tit, .order-detail .order__dada-rider .order-info2 .order-info2__insurance .order-info2__tit {
+          width: 80px;
+          padding-bottom: 5px;
+          line-height: 1;
+          display: inline-block;
+          vertical-align: top;
+          position: absolute;
+          left: 0;
+          top: 0; }
+          .order-detail .order__dada-rider .order-info2 .order-info2__coupon .order-info2__tit span, .order-detail .order__dada-rider .order-info2 .order-info2__insurance .order-info2__tit span {
+            font-size: 10px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__coupon .order-info2__con, .order-detail .order__dada-rider .order-info2 .order-info2__insurance .order-info2__con {
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          box-sizing: border-box;
+          padding-left: 80px; }
+          .order-detail .order__dada-rider .order-info2 .order-info2__coupon .order-info2__con select, .order-detail .order__dada-rider .order-info2 .order-info2__insurance .order-info2__con select {
+            height: 25px;
+            width: 100%;
+            border: 1px solid #ccc; }
+      .order-detail .order__dada-rider .order-info2 .order-info2__remark {
+        position: relative;
+        padding-bottom: 43px;
+        padding-left: 80px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__remark .order-info2__tit {
+          width: 80px;
+          padding-bottom: 5px;
+          line-height: 1;
+          display: inline-block;
+          vertical-align: top;
+          position: absolute;
+          left: 0;
+          top: 0; }
+          .order-detail .order__dada-rider .order-info2 .order-info2__remark .order-info2__tit span {
+            font-size: 10px; }
+        .order-detail .order__dada-rider .order-info2 .order-info2__remark .order-info2__con textarea {
+          height: 74px; }
+    .order-detail .order__dada-rider .order-call {
+      clear: both; }
+      .order-detail .order__dada-rider .order-call .order-call__price {
+        padding: 10px 0 19px;
+        border-top: 1px dotted #ccc;
+        border-bottom: 1px solid #727272;
+        position: relative; }
+        .order-detail .order__dada-rider .order-call .order-call__price strong {
+          color: #298afa;
+          font-size: 30px;
+          font-weight: 700;
+          display: inline-block;
+          vertical-align: middle;
+          height: 35px;
+          overflow: hidden; }
+        .order-detail .order__dada-rider .order-call .order-call__price > span {
+          color: #4a4a4a;
+          display: inline-block;
+          vertical-align: bottom;
+          padding-left: 10px; }
+        .order-detail .order__dada-rider .order-call .order-call__price .order-call__btns {
+          position: absolute;
+          right: 0;
+          top: 15px; }
+          .order-detail .order__dada-rider .order-call .order-call__price .order-call__btns button {
+            width: 123px;
+            height: 34px;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 10px;
+            line-height: 0.8;
+            box-sizing: border-box;
+            padding: 2px 0 0 30px;
+            margin-left: 20px; }
+            .order-detail .order__dada-rider .order-call .order-call__price .order-call__btns button:nth-child(1) {
+              background: #268aff url("https://viastelle-main.oss-cn-shanghai.aliyuncs.com/resources/img/hub/artboard%404x.png ") no-repeat 15px 50%;
+              background-size: 30px auto; }
+            .order-detail .order__dada-rider .order-call .order-call__price .order-call__btns button:nth-child(2) {
+              background: #268aff url(" https://viastelle-main.oss-cn-shanghai.aliyuncs.com/resources/img/hub/artboard%403x.png") no-repeat 20px 50%;
+              background-size: 25px auto; }
+  .order-detail .order-number {
+    padding: 35px 0 28px; }
+    .order-detail .order-number .order-number__tit {
+      padding-bottom: 10px;
+      line-height: 1; }
+      .order-detail .order-number .order-number__tit span {
+        font-size: 10px; }
+    .order-detail .order-number > span {
+      color: #9b9b9b; }
+  .order-detail .order-list {
+    border: 1px solid #cccccc;
+    padding: 15px 33px; }
+    .order-detail .order-list table {
+      width: 100%; }
+      .order-detail .order-list table tbody .order-list__list-wrap .order-list__list {
+        padding-bottom: 20px; }
+        .order-detail .order-list table tbody .order-list__list-wrap .order-list__list li span {
+          font-size: 12px;
+          color: #9b9b9b;
+          display: inline-block;
+          padding: 5px 0;
+          vertical-align: middle; }
+          .order-detail .order-list table tbody .order-list__list-wrap .order-list__list li span:nth-child(1) {
+            width: 10%;
+            text-align: left;
+            font-weight: 700; }
+          .order-detail .order-list table tbody .order-list__list-wrap .order-list__list li span:nth-child(2) {
+            width: 419px;
+            text-align: left;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis; }
+          .order-detail .order-list table tbody .order-list__list-wrap .order-list__list li span:nth-child(3) {
+            width: 10%;
+            text-align: right;
+            color: #50e3c2; }
+      .order-detail .order-list table tbody .order-list__totla-amount {
+        text-align: right;
+        font-size: 15px; }
+        .order-detail .order-list table tbody .order-list__totla-amount td {
+          border-top: 1px dotted #ccc;
+          padding: 10px 0 10px; }
+      .order-detail .order-list table tbody .order-list__discount-wrap .order-list__discount {
+        padding-bottom: 10px; }
+        .order-detail .order-list table tbody .order-list__discount-wrap .order-list__discount li span {
+          font-size: 12px;
+          color: #9b9b9b;
+          display: inline-block;
+          padding-bottom: 5px; }
+          .order-detail .order-list table tbody .order-list__discount-wrap .order-list__discount li span:nth-child(1) {
+            width: 90%;
+            text-align: left; }
+          .order-detail .order-list table tbody .order-list__discount-wrap .order-list__discount li span:nth-child(2) {
+            width: 10%;
+            text-align: right; }
+      .order-detail .order-list table tfoot .order-list__total-price td {
+        border-top: 1px dotted #ccc;
+        padding: 10px 0 0; }
+        .order-detail .order-list table tfoot .order-list__total-price td:nth-child(1) {
+          text-align: right; }
+          .order-detail .order-list table tfoot .order-list__total-price td:nth-child(1) > span {
+            display: block;
+            font-size: 10px; }
+        .order-detail .order-list table tfoot .order-list__total-price td:nth-child(2) {
+          text-align: right;
+          color: #d0021b; }
+  .order-detail > .order-info2 {
+    padding: 35px 0 43px;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden; }
+    .order-detail > .order-info2:after {
+      content: "";
+      clear: both; }
+    .order-detail > .order-info2 .order-info2__tit {
+      padding-bottom: 5px;
+      line-height: 1; }
+      .order-detail > .order-info2 .order-info2__tit span {
+        font-size: 10px; }
+    .order-detail > .order-info2 .order-info2__con input[type='text'] {
+      border: 1px solid #ccc;
+      padding: 0 5px;
+      width: 100%;
+      text-align: left;
+      height: 30px;
+      line-height: 30px;
+      color: #9b9b9b; }
+    .order-detail > .order-info2 .order-info2__con textarea {
+      border: 1px solid #ccc;
+      padding: 0 5px;
+      width: 100%;
+      text-align: left;
+      line-height: 30px;
+      color: #9b9b9b;
+      height: 50px; }
+    .order-detail > .order-info2 .order-info2__div1 {
+      width: 50%;
+      float: left;
+      overflow: hidden; }
+    .order-detail > .order-info2 .order-info2__div2 {
+      overflow: hidden; }
+    .order-detail > .order-info2 .order-info2__receiver {
+      width: 40%;
+      float: left;
+      padding-right: 20px;
+      padding-bottom: 40px; }
+    .order-detail > .order-info2 .order-info2__phone-number {
+      width: 60%;
+      float: left;
+      padding-right: 20px;
+      padding-bottom: 40px; }
+      .order-detail > .order-info2 .order-info2__phone-number .order-info2__con {
+        text-align: center;
+        height: 30px;
+        line-height: 30px; }
+    .order-detail > .order-info2 .order-info2__address {
+      padding-right: 20px;
+      position: relative; }
+      .order-detail > .order-info2 .order-info2__address .order-info2__con {
+        height: 60px;
+        box-sizing: border-box; }
+      .order-detail > .order-info2 .order-info2__address .order-info2__address-print {
+        width: 27px;
+        height: 27px;
+        border: 1px solid #ccc;
+        position: absolute;
+        top: 0;
+        right: 20px;
+        background: url("../assets/copyclipboard.svg") center no-repeat;
+        background-size: 60%; }
+    .order-detail > .order-info2 .order-info2__fapiao {
+      padding-left: 20px;
+      padding-bottom: 10px; }
+      .order-detail > .order-info2 .order-info2__fapiao .order-info2__con {
+        height: 60px;
+        box-sizing: border-box; }
+    .order-detail > .order-info2 .order-info2__note {
+      padding-left: 20px; }
+      .order-detail > .order-info2 .order-info2__note .order-info2__con {
+        height: 60px;
+        box-sizing: border-box; }
+  .order-detail .order-step {
+    text-align: center;
+    padding-bottom: 20px; }
+    .order-detail .order-step button {
+      width: 107px;
+      border: 1px solid #c0c0c0;
+      padding: 5px 0;
+      line-height: 1;
+      border-radius: 30px;
+      margin: 0 5px;
+      color: #c0c0c0;
+      background-color: #e8e8e8; }
+      .order-detail .order-step button span {
+        display: block;
+        font-size: 10px;
+        color: #c0c0c0; }
+      .order-detail .order-step button.order-step__item—active {
+        color: #fff;
+        background-color: #f5a623;
+        border-color: #f5a623; }
+        .order-detail .order-step button.order-step__item—active span {
+          color: #fff; }
+  .order-detail .rider_close {
+    border: 1px solid #9b9b9b;
+    width: 40px;
+    height: 40px;
+    line-height: 30px;
+    position: absolute;
+    right: 23px;
+    top: 10px;
+    border-radius: 5px; }
+    .order-detail .rider_close span {
+      font-size: 30px; }
